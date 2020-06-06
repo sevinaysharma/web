@@ -63,13 +63,13 @@ version: 1.0
 
 # stylesheets loaded in the <head>
 stylesheets:
-- /css/bootstrap.min.css
-- /css/font-awesome.min.css
-- /css/atom-one-dark.css
-- /css/jquery.fancybox.css
-- /css/nprogress.min.css
-- /css/valine.css
-- /css/life.css
+- /web/css/bootstrap.min.css
+- /web/css/font-awesome.min.css
+- /web/css/atom-one-dark.css
+- /web/css/jquery.fancybox.css
+- /web/css/nprogress.min.css
+- /web/css/valine.css
+- /web/css/life.css
 
 # sidebar color
 siderbar_style: /css/sidebar-light.css
