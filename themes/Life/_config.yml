@@ -4,7 +4,7 @@ language: zh
 
 # 博客导航
 menu:
-  首页: /
+  首页: /web
   关于: /about/
   链接: /links/
 
