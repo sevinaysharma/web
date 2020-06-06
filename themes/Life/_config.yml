@@ -36,7 +36,7 @@ leancloud:
 LeanStatistics_enable: false
 
 # 是否开启评论模块（可选值：true/false）
-comment: true
+comment: false
 
 # Disqus配置，填是否开启和，你的Disqus站点名
 disqus:
@@ -63,33 +63,33 @@ version: 1.0
 
 # stylesheets loaded in the <head>
 stylesheets:
-- /css/bootstrap.min.css
-- /css/font-awesome.min.css
-- /css/atom-one-dark.css
-- /css/jquery.fancybox.css
-- /css/nprogress.min.css
-- /css/valine.css
-- /css/life.css
+- /web/css/bootstrap.min.css
+- /web/css/font-awesome.min.css
+- /web/css/atom-one-dark.css
+- /web/css/jquery.fancybox.css
+- /web/css/nprogress.min.css
+- /web/css/valine.css
+- /web/css/life.css
 
 # sidebar color
-siderbar_style: /css/sidebar-light.css
+siderbar_style: /web/css/sidebar-light.css
 
 # scripts loaded in the end of the body
 scripts:
-- /js/jquery-2.2.4.min.js
+- /web/js/jquery-2.2.4.min.js
 - https://cdn1.lncld.net/static/js/3.1.0/av-min.js
-- /js/jquery.pjax.js
-- /js/nprogress.min.js
-- /js/tether.min.js
-- /js/bootstrap.min.js
-- /js/highlight.min.js
-- /js/highlightjs-line-numbers.min.js
-- /js/jquery.fancybox.js
-- /js/jquery.qrcode.min.js
-- /js/Valine.min.js
+- /web/js/jquery.pjax.js
+- /web/js/nprogress.min.js
+- /web/js/tether.min.js
+- /web/js/bootstrap.min.js
+- /web/js/highlight.min.js
+- /web/js/highlightjs-line-numbers.min.js
+- /web/js/jquery.fancybox.js
+- /web/js/jquery.qrcode.min.js
+- /web/js/Valine.min.js
 
 LeanStatistics_script:
-- /js/LeanStatistics.min.js
+- /web/js/LeanStatistics.min.js
 
 # Life Script
-life_script: /js/Life.js
+life_script: /web/js/Life.js
