@@ -20,7 +20,7 @@ categories:
 
 ## 点击应用图标后的流程
 
-![点击应用图标后的流程](Adesktop-icon-clicked.png)
+![点击应用图标后的流程](desktop-icon-clicked.png)
 
 这里有一点需要注意，如果你的程序入口 Activity 设置成了 `singleTask` 则每次程序从后台到前台，必定会显示这个 Activity。如果这个 Activity 被销毁了，系统会重新生成对应的实例。
 
