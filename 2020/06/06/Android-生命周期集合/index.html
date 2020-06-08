@@ -132,6 +132,9 @@
 <h2 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h2><p><img src="fragment.png" alt="fragment"></p>
 <h2 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h2><p><img src="activity_lifecycle.png" alt="activity"></p>
 <p><img src="Activity%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.jpeg" alt="Activity 完整启动流程"></p>
+<h2 id="点击应用图标后的流程"><a href="#点击应用图标后的流程" class="headerlink" title="点击应用图标后的流程"></a>点击应用图标后的流程</h2><p><img src="Adesktop-icon-clicked.png" alt="点击应用图标后的流程"></p>
+<p>这里有一点需要注意，如果你的程序入口 Activity 设置成了 <code>singleTask</code> 则每次程序从后台到前台，必定会显示这个 Activity。如果这个 Activity 被销毁了，系统会重新生成对应的实例。</p>
+<p>这是因为，点击桌面应用图标后，系统如果发现启动 Activity 对应的 task 存在就会激活这个 task，如果这个 task 不存在，就会创建这个 task 以及对应的 root activity。</p>
 <h2 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas"></a>Canvas</h2><p><img src="Canvas.jpg" alt="Canvas"></p>
 <h2 id="主题颜色"><a href="#主题颜色" class="headerlink" title="主题颜色"></a>主题颜色</h2><p><img src="Theme.jpeg" alt="主题色影响范围"></p>
 
