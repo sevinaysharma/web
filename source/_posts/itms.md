@@ -2,7 +2,9 @@
 title: 'UGC iOS 测试分发'
 date: 2020-06-10 10:52:06
 tags:
+- itms
 categories:
+- itms
 ---
 
 ## UGC iOS 测试分发
