@@ -1,6 +1,7 @@
 ---
 title: 'UGC iOS 测试分发'
 date: 2020-06-10 10:52:06
+permalink: items
 tags:
 - itms
 categories:
