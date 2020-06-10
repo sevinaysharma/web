@@ -20,7 +20,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <meta name="renderer" content="webkit">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no", user-scalable=no">
-  <title>UGC iOS 测试分发Hello Skill</title>
+  <title>Git 常见错误Hello Skill</title>
   <link rel="shortcut icon" href="">
   
     
@@ -109,8 +109,8 @@
             </header>
                 
 <header class="blog-post-page-title">
-    <h4>UGC iOS 测试分发</h4>
-    <time datetime="2020-06-10T02:52:06.000Z"><i class="fa fa-clock-o"></i>2020-06-10</time>
+    <h4>Git 常见错误</h4>
+    <time datetime="2020-06-06T17:30:53.000Z"><i class="fa fa-clock-o"></i>2020-06-07</time>
     
     
     
@@ -118,7 +118,7 @@
 	
         <span><i class="fa fa-folder-o"></i>
     		
-    	       <a href="/web/categories/itms/" rel="categories" data-toggle="tooltip" data-placement="top" title="Linux">itms</a>
+    	       <a href="/web/categories/Git/" rel="categories" data-toggle="tooltip" data-placement="top" title="Linux">Git</a>
     		
         </span>
 	
@@ -128,16 +128,11 @@
     <article class="blog-post-block blog-post-page-content">
         <section>
             
-                <h2 id="UGC-iOS-测试分发"><a href="#UGC-iOS-测试分发" class="headerlink" title="UGC iOS 测试分发"></a>UGC iOS 测试分发</h2><p><a href="itms-services:///?action=download-manifest&url=https%3A%2F%2Fduxze-apk.oss-cn-beijing.aliyuncs.com%2Fpapaya%2Fios%2Fitms%2Fmanifest%2Fmanifest2020-06-10_10-48.plist">点击下载 木瓜健康 2020-06-10_10-48</a></p>
-
+                <h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><h3 id="The-remote-end-hung-up-unexpectedly"><a href="#The-remote-end-hung-up-unexpectedly" class="headerlink" title="The remote end hung up unexpectedly"></a>The remote end hung up unexpectedly</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解决缓存控件不够导致的问题</span></span><br><span class="line">git <span class="keyword">config</span> http<span class="variable">.postBuffer</span> <span class="number">524288000</span></span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">git <span class="keyword">config</span> --<span class="keyword">global</span> http<span class="variable">.postBuffer</span> <span class="number">524288000</span></span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">git <span class="keyword">config</span> ssh<span class="variable">.postBuffer</span> <span class="number">524288000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 解决因为网速慢导致的错误</span></span><br><span class="line">git <span class="keyword">config</span> --<span class="keyword">global</span> http<span class="variable">.lowSpeedTime</span> <span class="number">999999</span></span><br></pre></td></tr></table></figure>
             
         </section>
         <footer class="blog-post-page-tags">
         
-			
-				
-			<a href="/web/tags/itms/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">itms</a>
-				
 			
 		
         </footer>
@@ -146,10 +141,12 @@
     	
     	
 		
+			<a href="/web/2020/06/06/GitHub-%E5%B8%B8%E7%94%A8%E5%BA%93%E5%88%86%E7%B1%BB%E6%B1%87%E6%80%BB/" class="blog-post-page-readmore-prev" data-toggle="tooltip" data-placement="top" title="GitHub 常用库分类汇总">上一篇</a>
+		
 
 		
 		
-			<a href="/web/:year/:month/:day/:title/" class="blog-post-page-readmore-next" data-toggle="tooltip" data-placement="top" title="新 APP 诞生记">下一篇</a>
+			<a href="/web/2020/06/06/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="blog-post-page-readmore-next" data-toggle="tooltip" data-placement="top" title="线性代数">下一篇</a>
 		
 
         <div style="clear: both;"></div>
@@ -248,7 +245,7 @@
                 return out;
             }
             // 生成
-            var qrcode= $('.post-qrcode-content-canvas').qrcode({width: 150,height: 150,text: toUtf8("https://joriwang.github.io/web/:title/")}).hide();
+            var qrcode= $('.post-qrcode-content-canvas').qrcode({width: 150,height: 150,text: toUtf8("https://joriwang.github.io/web/2020/06/06/Git-%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/")}).hide();
             var canvas=qrcode.find('canvas').get(0);
             $('.post-qrcode-content-img').attr('src',canvas.toDataURL('image/jpg'));
         </script>

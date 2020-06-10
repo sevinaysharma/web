@@ -160,7 +160,7 @@
     	
     	
 		
-			<a href="/web/:year/:month/:day/:title/" class="blog-post-page-readmore-prev" data-toggle="tooltip" data-placement="top" title="Git 常见错误">上一篇</a>
+			<a href="/web/2020/06/06/Git-%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/" class="blog-post-page-readmore-prev" data-toggle="tooltip" data-placement="top" title="Git 常见错误">上一篇</a>
 		
 
 		
@@ -262,7 +262,7 @@
                 return out;
             }
             // 生成
-            var qrcode= $('.post-qrcode-content-canvas').qrcode({width: 150,height: 150,text: toUtf8("https://joriwang.github.io/web/:year/:month/:day/:title/")}).hide();
+            var qrcode= $('.post-qrcode-content-canvas').qrcode({width: 150,height: 150,text: toUtf8("https://joriwang.github.io/web/2020/06/06/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/")}).hide();
             var canvas=qrcode.find('canvas').get(0);
             $('.post-qrcode-content-img').attr('src',canvas.toDataURL('image/jpg'));
         </script>
