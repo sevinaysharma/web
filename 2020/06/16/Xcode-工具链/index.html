@@ -20,7 +20,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <meta name="renderer" content="webkit">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no", user-scalable=no">
-  <title>新 APP 诞生记Hello Skill</title>
+  <title>Xcode 工具链Hello Skill</title>
   <link rel="shortcut icon" href="">
   
     
@@ -109,12 +109,18 @@
             </header>
                 
 <header class="blog-post-page-title">
-    <h4>新 APP 诞生记</h4>
-    <time datetime="2020-06-06T17:49:01.000Z"><i class="fa fa-clock-o"></i>2020-06-07</time>
+    <h4>Xcode 工具链</h4>
+    <time datetime="2020-06-16T17:21:16.000Z"><i class="fa fa-clock-o"></i>2020-06-17</time>
     
     
     
     
+	
+        <span><i class="fa fa-folder-o"></i>
+    		
+    	       <a href="/web/categories/xcode/" rel="categories" data-toggle="tooltip" data-placement="top" title="Linux">xcode</a>
+    		
+        </span>
 	
     
 </header>
@@ -122,37 +128,37 @@
     <article class="blog-post-block blog-post-page-content">
         <section>
             
-                <h2 id="前置材料"><a href="#前置材料" class="headerlink" title="前置材料"></a>前置材料</h2><ol>
-<li>确定包名</li>
-<li>开发账号</li>
-<li>社会化分享账号申请</li>
-<li>应用图标、商店预览图、描述等（iOS 平台不能有 Alpha 通道）</li>
-<li>用户协议和隐私条款</li>
-<li>产品原型、设计图</li>
-<li>开发</li>
-</ol>
-<h2 id="开发账号"><a href="#开发账号" class="headerlink" title="开发账号"></a>开发账号</h2><h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><p>现在国内的账号申请和应用上线都需要提供“软著”。软著的申请一般通过代理公司申请，优点是方便快捷，单个 APP 一般不超过一千元。</p>
-<h3 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h3><p>苹果的证书分为三种：个人证书、公司证书、企业证书。个人证书和公司证书用于上架 AppStore，价格一样。不同点在于，公司证书可以添加多个开发者。可以分 team 进行账号管理。企业证书用于 AppStore 外的应用分发，企业证书签名的应用不能上 AppStore。现在（2020）企业证书申请难度很大，所以企业证书存在私下交易的情况，且价格不菲。</p>
-<p>申请公司证书，首先需要申请邓白氏编码。申请邓白氏需要先<a href="https://developer.apple.com/enroll/duns-lookup/#!/search" target="_blank" rel="noopener" title="查证">查证</a>公司是否已经有邓白氏，这一步是必需步骤。如果有，则在查询结果里选择自己的公司，点“继续”就可以。如果没有则在查询结果页面找到，提交给 D&amp;B 就可以。</p>
-<p>一般两个工作日内会有工作人员通过预留的邮箱联系你，让你补充必要信息。之后两个工作日内下发邓白氏编码。<del>然后，再等待约 14 个工作日（具体看邮件通知）该编码才生效。</del> 实践证明，相关公司加快了信息审核速度。拿到邓白氏后就可以尝试购买了，只要苹果后台能查询到。最后实际购买成功耗时约一周。</p>
-<p>拿到邓白氏之后，就可以购买公司账号了。<del>需要注意的是，支付仅支持 VISA 和 MasterCard。</del> 现在购买都是通过 APP <em>Developer</em>。在这个 APP 上登录 Apple ID 后直接购买就可以，付款是使用当前设备上 Apple ID 中的账户付款。比如，B 账户在购买开发者，A 账户登录了 Apple 设备（例如 iPhone 手机）。在设备上通过 B 登录 <em>Developer</em>，此时点击付款，会使用 A 中的付款信息付款（可以是支付宝、微信、信用卡等等）</p>
-<h2 id="上线常见注意事项"><a href="#上线常见注意事项" class="headerlink" title="上线常见注意事项"></a>上线常见注意事项</h2><h3 id="Android（中国大陆）"><a href="#Android（中国大陆）" class="headerlink" title="Android（中国大陆）"></a>Android（中国大陆）</h3><ol>
-<li>第一次启动需要弹窗提示用户接受隐私协议和使用条款</li>
-<li>弹窗提示中不能简单写隐私协议和条款，必须跟上应用名称，否则可能判定协议无效。例如：软件名称为“呵呵”，<del>请同意《隐私协议》和《使用条款》</del>请同意《呵呵隐私协议》和《呵呵使用条款》</li>
-<li>宣传文案不能碰瓷及涉及 iOS</li>
-<li>部分商店会要求商店名称和安装后的显示名称相同</li>
-</ol>
-<h3 id="iOS-1"><a href="#iOS-1" class="headerlink" title="iOS"></a>iOS</h3><ol>
-<li>登录需添加 Apple ID 登录</li>
-<li>必须适配 iPad</li>
-<li>有 UGC 内容时要有黑名单机制、要有举报机制</li>
-<li>有聊天功能时要有拉黑功能、举报功能</li>
-<li>隐私权限申请要有明确的描述文本</li>
-<li>必须适配 IPv6 网络</li>
-<li>商店任何文案都不能碰瓷及涉及 Android（安卓）</li>
-<li>商店配图要弱化手机型号特征（比如：不能一眼就能看出是 iphone x 或者 iphone e）</li>
-<li>商店配图要使用对应平台的设备配图（比如 iPad 商店的配图不能让用户看出是手机）</li>
-</ol>
+                <p>Xcode 除了 GUI 用于日常开发外，还提供了大量的命令行工具。这些工具对于 CI 和理解 iOS 的细节有很大帮助（如：clang 重写 OC 文件为 CPP）</p>
+<h2 id="Xcode-Tools"><a href="#Xcode-Tools" class="headerlink" title="Xcode Tools"></a>Xcode Tools</h2><h3 id="xcode-select"><a href="#xcode-select" class="headerlink" title="xcode-select"></a>xcode-select</h3><p>当有多个 Xcode 版本同时存在时，可以通过这个工具选择命令行使用的 Xcode 版本。这种选择是通过指定开发工具文件夹位置实现的。</p>
+<p>详见 <code>xcode-select --help</code></p>
+<h3 id="xcrun"><a href="#xcrun" class="headerlink" title="xcrun"></a>xcrun</h3><p>xcrun 可以执行其他 Xcode 相关命令，并为这个命令提供基于当前 Xcode 版本的环境信息。</p>
+<p>例如，使用 <code>clang</code> 重写 OC 文件时，如果引用了 <code>&lt;UIKit/UIKit.h&gt;</code> 会提示 <code>fatal error: &#39;UIKit/UIKit.h&#39; file not found</code>。</p>
+<p>这是因为没有提供系统库路径，这个时候可以通过执行下面的命令解决这个问题 <code>xcrun -sdk iphonesimulator clang -rewrite-objc main.m</code></p>
+<p>xcrun 还可以实现应用上传商店和应用验证。详见 <code>xcrun altool --help</code></p>
+<h3 id="xcodebuild"><a href="#xcodebuild" class="headerlink" title="xcodebuild"></a>xcodebuild</h3><p>这个工具用于构建 Xcode 项目。下面的简单脚本可以实现 AdHoc 版本的打包。使用脚本打包并上传商店和这里的类似。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/sh</span></span><br><span class="line"></span><br><span class="line">xcodebuild clean</span><br><span class="line">pod install</span><br><span class="line">xcodebuild -workspace Runner.xcworkspace -scheme Runner -archivePath <span class="variable">$archivePath</span> -allowProvisioningUpdates -allowProvisioningDeviceRegistration archive</span><br><span class="line">xcodebuild -exportArchive -archivePath <span class="variable">$archivePath</span> -exportPath <span class="variable">$ipaPath</span> -exportOptionsPlist <span class="variable">$exportOptionsPath</span></span><br></pre></td></tr></table></figure>
+
+<p>exportOptionsPath 是导出 ipa 的 plist 配置信息。具体支持的参数可以通过 <code>xcodebuild --help</code> 查看</p>
+<h2 id="编译-amp-汇编"><a href="#编译-amp-汇编" class="headerlink" title="编译 &amp; 汇编"></a>编译 &amp; 汇编</h2><ul>
+<li>clang: 编译 C、C++、Objective-C和 Objective-C 源文件。</li>
+<li>lldb: 调试C、C++、Objective-C 和 Objective-C 程序</li>
+<li>nasm: 汇编文件</li>
+<li>ndisasm: 反汇编文件</li>
+<li>symbols: 显示一个文件或者进程的符号信息。</li>
+<li>dwarfdump: 可以通过 dSYM 的信息。（如 dSYM 对应的指令集）</li>
+<li>strip: 删除或修改符号表附加到汇编器和链接编辑器的输出。</li>
+<li>atos: 将数字内存地址转换为二进制映像或进程的符号。</li>
+</ul>
+<h2 id="库"><a href="#库" class="headerlink" title="库"></a>库</h2><ul>
+<li>ld: 将目标文件和库合并成一个文件。</li>
+<li>otool: 显示目标文件或库的指定部分。</li>
+<li>lipo: 创建、编辑、查看静态库</li>
+<li>ar: 创建和维护库文档。</li>
+<li>libtool: 使用链接器 ld 创建库。</li>
+<li>ranlib: 更新归档库的目录。</li>
+<li>mksdk: 创建和更新 SDK。</li>
+<li>lorder: 列出目标文件的依赖。</li>
+</ul>
 
             
         </section>
@@ -160,7 +166,7 @@
         
 			
 				
-			<a href="/web/tags/APP%E5%BC%80%E5%8F%91%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">APP开发大致流程</a>
+			<a href="/web/tags/xcode/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">xcode</a>
 				
 			
 		
@@ -170,12 +176,10 @@
     	
     	
 		
-			<a href="/web/2020/06/10/itms/" class="blog-post-page-readmore-prev" data-toggle="tooltip" data-placement="top" title="UGC iOS 测试分发">上一篇</a>
-		
 
 		
 		
-			<a href="/web/2020/06/06/Android-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%9B%86%E5%90%88/" class="blog-post-page-readmore-next" data-toggle="tooltip" data-placement="top" title="Android 生命周期集合">下一篇</a>
+			<a href="/web/2020/06/10/itms/" class="blog-post-page-readmore-next" data-toggle="tooltip" data-placement="top" title="UGC iOS 测试分发">下一篇</a>
 		
 
         <div style="clear: both;"></div>
@@ -274,7 +278,7 @@
                 return out;
             }
             // 生成
-            var qrcode= $('.post-qrcode-content-canvas').qrcode({width: 150,height: 150,text: toUtf8("https://joriwang.github.io/web/2020/06/06/%E6%96%B0-APP-%E8%AF%9E%E7%94%9F%E8%AE%B0/")}).hide();
+            var qrcode= $('.post-qrcode-content-canvas').qrcode({width: 150,height: 150,text: toUtf8("https://joriwang.github.io/web/2020/06/16/Xcode-%E5%B7%A5%E5%85%B7%E9%93%BE/")}).hide();
             var canvas=qrcode.find('canvas').get(0);
             $('.post-qrcode-content-img').attr('src',canvas.toDataURL('image/jpg'));
         </script>
