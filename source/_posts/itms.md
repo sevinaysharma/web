@@ -9,6 +9,8 @@ categories:
 
 ## UGC iOS 测试分发
 
+[点击下载 木瓜健康 2020-07-01_16-29](itms-services:///?action=download-manifest&url=https%3A%2F%2Fduxze-apk.oss-cn-beijing.aliyuncs.com%2Fpapaya%2Fios%2Fitms%2Fmanifest%2Fmanifest2020-07-01_16-29.plist)
+
 [点击下载 木瓜健康 2020-07-01_10-33](itms-services:///?action=download-manifest&url=https%3A%2F%2Fduxze-apk.oss-cn-beijing.aliyuncs.com%2Fpapaya%2Fios%2Fitms%2Fmanifest%2Fmanifest2020-07-01_10-33.plist)
 
 [点击下载 木瓜健康 2020-06-24_19-38](itms-services:///?action=download-manifest&url=https%3A%2F%2Fduxze-apk.oss-cn-beijing.aliyuncs.com%2Fpapaya%2Fios%2Fitms%2Fmanifest%2Fmanifest2020-06-24_19-38.plist)
