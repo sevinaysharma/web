@@ -18,3 +18,31 @@ openssl x509 -in app_pushnotification.cer -inform der -out app_pushnotificationp
 openssl pkcs12 -in apns_dev.p12 -nodes -nocerts -out app_pushnotification.pem
 cat app_pushnotificationpass.pem app_pushnotification.pem > app_pushnotification_end.pem
 ```
+
+## 不同版本注册推送
+
+```
+// iOS10 下需要使用新的 API
+if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+    UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+        
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound + UNAuthorizationOptionBadge)
+                              completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                                  // Enable or disable features based on authorization.
+                                  if (granted) {
+                                      [application registerForRemoteNotifications];
+                                  }
+                              }];
+#endif
+}
+else if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+    UIUserNotificationType myTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+}else {
+    UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound;
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
+}
+```
