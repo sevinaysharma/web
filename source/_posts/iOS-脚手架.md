@@ -17,6 +17,9 @@ openssl x509 -in app_pushnotification.cer -inform der -out app_pushnotificationp
 // apns_dev.p12 为包含了公私钥的证书
 openssl pkcs12 -in apns_dev.p12 -nodes -nocerts -out app_pushnotification.pem
 cat app_pushnotificationpass.pem app_pushnotification.pem > app_pushnotification_end.pem
+
+// 或者使用
+openssl pkcs12 -in MyApnsCert.p12 -out MyApnsCert.pem -nodes
 ```
 
 ## 不同版本注册推送
