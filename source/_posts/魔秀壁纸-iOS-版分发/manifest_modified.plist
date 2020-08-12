@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>assets</key>
+			<array>
+				<dict>
+					<key>kind</key>
+					<string>software-package</string>
+					<key>url</key>
+					<string>http://mxss.test.imoxiu.cn/common/057736442576d0757b7f87c7dea02853f74d24de
+</string>
+				</dict>
+				<dict>
+					<key>kind</key>
+					<string>display-image</string>
+					<key>url</key>
+					<string>http://mxss.test.imoxiu.cn/common/6845df9f7b6c0f20f1e2d788abc361c58173c3ce</string>
+				</dict>
+				<dict>
+					<key>kind</key>
+					<string>full-size-image</string>
+					<key>url</key>
+					<string>http://mxss.test.imoxiu.cn/common/5063ffd0d413c3ed1634b470c35878209eab9f19</string>
+				</dict>
+			</array>
+			<key>metadata</key>
+			<dict>
+				<key>bundle-identifier</key>
+				<string>net.mx.wallpaper</string>
+				<key>bundle-version</key>
+				<string>1.0.1</string>
+				<key>kind</key>
+				<string>software</string>
+				<key>platform-identifier</key>
+				<string>com.apple.platform.iphoneos</string>
+				<key>title</key>
+				<string>魔秀壁纸</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
