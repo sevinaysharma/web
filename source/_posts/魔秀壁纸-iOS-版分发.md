@@ -6,6 +6,4 @@ categories:
   - itms
 ---
 
-[点击下载 魔秀壁纸](itms-services:///?action=download-manifest&url=https%3a%2f%2fjoriwang.github.io%2fweb%2f2020%2f08%2f11%2f%e9%ad%94%e7%a7%80%e5%a3%81%e7%ba%b8-iOS-%e7%89%88%e5%88%86%e5%8f%91%2fmanifest_modified.plist)
-
-![](manifest_modified.plist)
+[点击下载 魔秀壁纸22](itms-services:///?action=download-manifest&url=https%3a%2f%2fres-jori.obs.cn-north-1.myhuaweicloud.com%2fmoxiu%2fwallpaper-ios%2fitms%2fmanifest%2f2020-08-12_16-40.plist)
