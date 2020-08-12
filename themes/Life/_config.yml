@@ -50,9 +50,9 @@ valine_enable: false
 post_excerpt: false
 
 # 文章页打赏方式图片(图片路径或链接)
-alipay: http://dl.weic96.cn/logo.png
-wechat: http://dl.weic96.cn/logo.png
-qq: http://dl.weic96.cn/logo.png
+alipay: https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/alipay.jpg
+wechat: https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/wechat.png
+qq: https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/qqpay.png
 
 
 # 主题版本
