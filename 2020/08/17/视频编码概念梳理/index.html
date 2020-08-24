@@ -128,14 +128,14 @@
     <article class="blog-post-block blog-post-page-content">
         <section>
             
-                <p>最近开始接触 LivePhoto 做壁纸相关的内容。制作 LivePhoto 不可避免需要设计视频编辑</p>
+                <h1 id="视频相关概念"><a href="#视频相关概念" class="headerlink" title="视频相关概念"></a>视频相关概念</h1><p>最近开始接触 LivePhoto 做壁纸相关的内容。制作 LivePhoto 不可避免需要设计视频编辑</p>
 <p>为视频文件添加 metadata 用到了两种方式，一种是使用 AVFoundation 框架，另一种是使用 ffmpeg。使用 AVFoundation 的优点是，系统支持，效率会有提升；缺点就是框架自带异步操作，制作 LivePhoto 需要多个步骤，想要做成同步代码很啰嗦，还有就是代码量有点大，涉及框架中的不同概念。使用 ffmpeg 的好处是，代码量小，处理速度可以接受，支持异步和同步 API；缺点是需要额外集成会造成包体积变大。</p>
 <p>对于 ffmpeg 的入门，推荐阮一峰的<a href="https://www.ruanyifeng.com/blog/2020/01/ffmpeg.html" target="_blank" rel="noopener">FFmpeg 视频处理入门教程</a> 简单明了的让新手了解 ffmpeg 的工作机制和命令行格式。非常棒的文章。</p>
 <p>在视频处理过程中需要明确几个概念颜色空间、编码格式、容器格式。这三个概念分别具化为 YUV420P、H264、MP4。</p>
 <p>视频（图片）要展示出来就要有颜色，对颜色编码量化就要用到颜色空间。目前常见的颜色空间分别为 RGB 和 YUV。所以 YUV 就是和 RGB 一样的东西。视频中使用 YUV 比较多，比如苹果中视频录制就是用的 YUV420P。</p>
 <p>经过硬件采集转为 YUV 记录色彩值后，此时的数据为原始数据，此时的数据会很大。这个时候下一步会使用编码格式将原始数据编码，h264 就是一种编码格式。</p>
 <p>一个视频文件除了有视频数据外，还有音频数据，额外的元数据。有些甚至有多个音频数据。为了将这些数据放在一起，就使用到了容器格式。常用的视频容器格式有 mp4、mov、avi 等</p>
-
+<h1 id="FFmpeg"><a href="#FFmpeg" class="headerlink" title="FFmpeg"></a>FFmpeg</h1><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg y -i aa.<span class="keyword">mov</span> -movflags use_metadata_tags -metadata custom=customValue <span class="keyword">out</span>.<span class="keyword">mov</span></span><br></pre></td></tr></table></figure>
             
         </section>
         <footer class="blog-post-page-tags">
@@ -143,6 +143,8 @@
 			
 				
 			<a href="/web/tags/%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">视频相关概念</a>
+				
+			<a href="/web/tags/FFmpeg/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">FFmpeg</a>
 				
 			
 		
@@ -284,7 +286,7 @@
                     <span class="blog-sidebar-count-span">文章</span>
                 </div>
                 <div class="blog-sidebar-count-right">
-                    <p class="blog-sidebar-count-p">13</p>
+                    <p class="blog-sidebar-count-p">14</p>
                     <span class="blog-sidebar-count-span">标签</span>
                 </div>
                 <div style="clear: both;"></div>
@@ -395,6 +397,8 @@
                       <li><a href="/web/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="tag-could" data-toggle="tooltip" data-placement="top" title="线性代数">线性代数</a></li>
                     
                       <li><a href="/web/tags/%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" class="tag-could" data-toggle="tooltip" data-placement="top" title="视频相关概念">视频相关概念</a></li>
+                    
+                      <li><a href="/web/tags/FFmpeg/" class="tag-could" data-toggle="tooltip" data-placement="top" title="FFmpeg">FFmpeg</a></li>
                     
                       <li><a href="/web/tags/LivePhoto/" class="tag-could" data-toggle="tooltip" data-placement="top" title="LivePhoto">LivePhoto</a></li>
                     
