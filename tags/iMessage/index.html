@@ -124,7 +124,10 @@
             <section>
               
                 
-                场景在 iOS 11 上 iMessage App 只能出现在 iMessage 中。上下文为 MSMessagesAppPresentationContextMessages。从 iOS 12 开始，iMessage App 支持 FaceTime。如果要支
+                消息从类上分，消息一共分为 MSMessage、MSSticker、NSString、NSURL。
+NSString 是直接把一段文本放到输入框发送。
+NSURL 用于发送附件。所以这个 url 一定要是 file URL
+MSSticker 和附件消息类似。
                 ...
               
             </section>
