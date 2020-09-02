@@ -33,6 +33,10 @@ LivePhoto 使用 Identifier（一般用 UUID）将图片和视频 *pair* 起来�
 
 这里需要注意的是，生成 LivePhoto 预览数据 `PHLivePhoto` 时传入的参数是资源 URL。如果使用的视频和壁纸在服务器上，最好先将资源下载到本地，否则会导致预览无效果。
 
+### 坑
+
+需要注意的是，在使用 `+ (PHLivePhotoRequestID)requestLivePhotoWithResourceFileURLs:(NSArray<NSURL *> *)fileURLs placeholderImage:(nullable UIImage *)image targetSize:(CGSize)targetSize contentMode:(PHImageContentMode)contentMode resultHandler:(void(^)(PHLivePhoto *_Nullable livePhoto, NSDictionary *info))resultHandler` 生成 `PHLivePhoto` 时 *fileURLs* 中的 fileUrl 需要带上拓展名，不然会失败。
+
 ## FFmpeg
 
 刚开始尝试过使用 FFmpeg 来处理视频。简单添加 metadata 没有问题，但是如何添加 `Data: none (mebx / 0x7862656D), 1 kb/s (default)` 轨还没有找到合适的方法。
