@@ -147,6 +147,43 @@
 <p>上面的样例就兼顾了新老版本。</p>
 <p>需要注意的是，文件名必须为 <code>apple-app-site-association</code>，不能带任何其他字符和拓展名。文件编码为 <code>UTF-8</code></p>
 <p>其他事项请参考 <a href="https://developer.apple.com/documentation/safariservices/supporting_associated_domains?language=objc" target="_blank" rel="noopener">Supporting Associated Domains</a></p>
+<table>
+<thead>
+<tr>
+<th align="center">符号</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/</td>
+<td align="left">The pattern to match with the URL path component. The default is *, which matches everything.</td>
+</tr>
+<tr>
+<td align="center">?</td>
+<td align="left">The pattern or dictionary to match with the URL query component. The default is *, which matches everything.Possible types: string, applinks.Details.Components.Query</td>
+</tr>
+<tr>
+<td align="center">#</td>
+<td align="left">The pattern to match with the URL fragment component. The default is *, which matches everything.</td>
+</tr>
+<tr>
+<td align="center">exclude</td>
+<td align="left">A Boolean value that indicates whether to stop pattern matching and prevent the universal link from opening if the URL matches the associated pattern. The default is false.</td>
+</tr>
+<tr>
+<td align="center">comment</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">caseSensitive</td>
+<td align="left">A Boolean value that indicates whether pattern matching is case-sensitive. The default is true.</td>
+</tr>
+<tr>
+<td align="center">percentEncoded</td>
+<td align="left">A Boolean value that indicates whether URLs are percent-encoded. The default is true.</td>
+</tr>
+</tbody></table>
+<p><a href="https://developer.apple.com/documentation/bundleresources/applinks/details/components?language=objc" target="_blank" rel="noopener">applinks.Details.Components</a></p>
 <h3 id="Universal-Link-页面"><a href="#Universal-Link-页面" class="headerlink" title="Universal Link 页面"></a>Universal Link 页面</h3><p>这里需要注意的是跨域问题。iOS9.2 以后需要跨域访问指定的 domain 才能触发打开 APP 操作。详见<strong>概述</strong></p>
 <p>目前微信 7.0.15 放开了 Universal Link（具体从哪个版本开始没有考究）。</p>
 <p>对于 Safari 浏览器来说，还有一种方式可以跳转应用或者商店，那就是使用 Safari 定制版 meta <code>&lt;meta charset=&quot;UTF-8&quot; name=&quot;apple-itunes-app&quot; content=&quot;app-id=yourAppId, affiliate-data=yourAffiliateData, app-argument=yourScheme://aa.com&quot;&gt;</code>。使用了上面的代码后，用 Safari 浏览器打开时顶部会有 APP 信息栏。如果用户已经安装了应用，点击就跳转应用；如果用户没有安装，则点击跳转商店。</p>
@@ -339,13 +376,13 @@
                       </li>
                     
                       <li class="list-group-item justify-content-between">
-                          <a href="/web/categories/iOS/">iOS</a>
-                          <span class="badge badge-default badge-pill">3</span>
+                          <a href="/web/categories/xcode/">xcode</a>
+                          <span class="badge badge-default badge-pill">1</span>
                       </li>
                     
                       <li class="list-group-item justify-content-between">
-                          <a href="/web/categories/xcode/">xcode</a>
-                          <span class="badge badge-default badge-pill">1</span>
+                          <a href="/web/categories/iOS/">iOS</a>
+                          <span class="badge badge-default badge-pill">3</span>
                       </li>
                     
                       <li class="list-group-item justify-content-between">
@@ -399,10 +436,6 @@
                     
                       <li><a href="/web/tags/APK/" class="tag-could" data-toggle="tooltip" data-placement="top" title="APK">APK</a></li>
                     
-                      <li><a href="/web/tags/Universal-Link/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Universal Link">Universal Link</a></li>
-                    
-                      <li><a href="/web/tags/Deep-Link/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Deep Link">Deep Link</a></li>
-                    
                       <li><a href="/web/tags/xcode/" class="tag-could" data-toggle="tooltip" data-placement="top" title="xcode">xcode</a></li>
                     
                       <li><a href="/web/tags/iMessage/" class="tag-could" data-toggle="tooltip" data-placement="top" title="iMessage">iMessage</a></li>
@@ -424,6 +457,10 @@
                       <li><a href="/web/tags/FFmpeg/" class="tag-could" data-toggle="tooltip" data-placement="top" title="FFmpeg">FFmpeg</a></li>
                     
                       <li><a href="/web/tags/LivePhoto/" class="tag-could" data-toggle="tooltip" data-placement="top" title="LivePhoto">LivePhoto</a></li>
+                    
+                      <li><a href="/web/tags/Universal-Link/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Universal Link">Universal Link</a></li>
+                    
+                      <li><a href="/web/tags/Deep-Link/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Deep Link">Deep Link</a></li>
                     
                   
                 </ul>
