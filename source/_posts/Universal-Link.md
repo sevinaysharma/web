@@ -132,6 +132,20 @@ categories:
 
 其他事项请参考 [Supporting Associated Domains](https://developer.apple.com/documentation/safariservices/supporting_associated_domains?language=objc)
 
+
+|符号|含义|
+|:-:|:---|
+|/|The pattern to match with the URL path component. The default is *, which matches everything.
+|?|The pattern or dictionary to match with the URL query component. The default is *, which matches everything.Possible types: string, applinks.Details.Components.Query|
+|#|The pattern to match with the URL fragment component. The default is *, which matches everything.|
+|exclude|A Boolean value that indicates whether to stop pattern matching and prevent the universal link from opening if the URL matches the associated pattern. The default is false.|
+|comment||Text that the system ignores. Use this to provide information about the URLs a pattern matches.|
+|caseSensitive|A Boolean value that indicates whether pattern matching is case-sensitive. The default is true.|
+|percentEncoded|A Boolean value that indicates whether URLs are percent-encoded. The default is true.|
+
+[applinks.Details.Components](https://developer.apple.com/documentation/bundleresources/applinks/details/components?language=objc)
+
+
 ### Universal Link 页面
 
 这里需要注意的是跨域问题。iOS9.2 以后需要跨域访问指定的 domain 才能触发打开 APP 操作。详见**概述**
