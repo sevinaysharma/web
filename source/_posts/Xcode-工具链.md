@@ -51,7 +51,7 @@ exportOptionsPath 是导出 ipa 的 plist 配置信息。具体支持的参数�
 * nasm: 汇编文件
 * ndisasm: 反汇编文件
 * symbols: 显示一个文件或者进程的符号信息。
-* dwarfdump: 可以通过 dSYM 的信息。（如 dSYM 对应的指令集）
+* dwarfdump: DWARF 读取器。可以读取二进制文件中的调试信息和 dSYM 中的信息。详见[iOS中符号的那些事儿](https://juejin.im/post/6844904164208689166) 和 [iOS 符号二三事](https://juejin.im/post/6844904133321818126)
 * strip: 删除或修改符号表附加到汇编器和链接编辑器的输出。
 * atos: 将数字内存地址转换为二进制映像或进程的符号。
 
