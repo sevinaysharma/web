@@ -2,10 +2,9 @@
 title: iOS 脚手架
 date: 2020-07-08 10:12:51
 tags:
-- APNS
-- PEM
+ - APNS
 categories:
-- APNS Pem 证书
+ - iOS
 ---
 
 
