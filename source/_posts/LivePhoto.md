@@ -26,7 +26,7 @@ LivePhoto 支持两种存储形式。默认使用容器格式 `HEIC`。容器中
 LivePhoto 使用 Identifier（一般用 UUID）将图片和视频 *pair* 起来。所以制作 LivePhoto 需要做三件事：
 
 1. 在图片和视频中添加 Identifier 元数据
-2. 在视频文件中添加一个数据轨，该数据流用来描述播放静态图片的时间段
+2. 在视频文件中添加一个数据轨(timed metadata)。这个 track 用于触发播放器对应 LivePhoto 行为的操作。[详见此文](https://www.unified-streaming.com/blog/how-make-your-media-streams-smarter-using-timed-metadata)
 3. 使用 `PhPhotoLibrary` 将数据保存到相册（或者生成 `PHLivePhoto` 用于展示）
 
 具体实现可以参照 [LivePhotoDemo](https://github.com/genadyo/LivePhotoDemo)。文末也会附相关代码。
