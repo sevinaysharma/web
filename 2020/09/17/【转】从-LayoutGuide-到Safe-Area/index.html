@@ -1,0 +1,561 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no", user-scalable=no">
+  <title>【转】从 LayoutGuide 到Safe AreaHello Skill</title>
+  <link rel="shortcut icon" href="">
+  
+    
+    
+      <link rel="stylesheet" href="/web/css/bootstrap.min.css">
+    
+      <link rel="stylesheet" href="/web/css/font-awesome.min.css">
+    
+      <link rel="stylesheet" href="/web/css/atom-one-dark.css">
+    
+      <link rel="stylesheet" href="/web/css/jquery.fancybox.css">
+    
+      <link rel="stylesheet" href="/web/css/nprogress.min.css">
+    
+      <link rel="stylesheet" href="/web/css/valine.css">
+    
+      <link rel="stylesheet" href="/web/css/life.css">
+    
+  
+
+  
+
+  <!-- jQuery first, then Tether, then Bootstrap JS. -->
+  
+  
+  
+    <script src="/web/js/jquery-2.2.4.min.js"></script>
+  
+    <script src="https://cdn1.lncld.net/static/js/3.1.0/av-min.js"></script>
+  
+    <script src="/web/js/jquery.pjax.js"></script>
+  
+    <script src="/web/js/nprogress.min.js"></script>
+  
+    <script src="/web/js/tether.min.js"></script>
+  
+    <script src="/web/js/bootstrap.min.js"></script>
+  
+    <script src="/web/js/highlight.min.js"></script>
+  
+    <script src="/web/js/highlightjs-line-numbers.min.js"></script>
+  
+    <script src="/web/js/jquery.fancybox.js"></script>
+  
+    <script src="/web/js/jquery.qrcode.min.js"></script>
+  
+    <script src="/web/js/Valine.min.js"></script>
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+<script>AV.init({appId:'',appKey:''});</script>
+<script type="text/javascript">
+      var config = {
+            ClasS: 'Counter',
+            el:'.views',
+            elP: '.views-post'
+      }
+</script>
+<div class="container">
+    <div class="row blog-box-shadow">
+        <!--博客主栏开始-->
+        <div class="col-xl-9 col-lg-12 blog-main" id="pjax-box">
+            <header class="blog-header">
+                <a href="https://joriwang.github.io/web" class="blog-header-mobile-title">Hello Skill</a>
+                <a href="javascript:;" class="blog-header-navbar-btn"><i class="fa fa-bars"></i></a>
+                <nav class="blog-header-navbar blog-header-fixed">
+                    <ul class="blog-navbar-links">
+                        
+                          <li class="blog-nav-item"><a href="/web" class="transition">首页</a></li>
+                        
+                          <li class="blog-nav-item"><a href="/about/" class="transition">关于</a></li>
+                        
+                          <li class="blog-nav-item"><a href="/links/" class="transition">链接</a></li>
+                        
+                        <div class="blog-navbar-right">
+                            <form action="">
+                                <div class="input-group">
+                                    <input type="text" class="blog-header-search" placeholder="search...">
+                                    <buttn type="submit" class="blog-header-search-btn"><i class="fa fa-search"></i></buttn>
+                                </div>
+                            </form>
+                        </div>
+                    </ul>
+                </nav>
+            </header>
+                
+<header class="blog-post-page-title">
+    <h4>【转】从 LayoutGuide 到Safe Area</h4>
+    <time datetime="2020-09-17T06:03:40.000Z"><i class="fa fa-clock-o"></i>2020-09-17</time>
+    
+    
+    
+    
+	
+        <span><i class="fa fa-folder-o"></i>
+    		
+    	       <a href="/web/categories/iOS/" rel="categories" data-toggle="tooltip" data-placement="top" title="Linux">iOS</a>
+    		
+        </span>
+	
+    
+</header>
+<div class="blog-main-post blog-post-page-box">
+    <article class="blog-post-block blog-post-page-content">
+        <section>
+            
+                <blockquote>
+<p>本文转载自<a href="https://www.cnblogs.com/lurenq/p/7849813.html" target="_blank" rel="noopener">iOS开发-LayoutGuide（从top/bottom LayoutGuide到Safe Area）</a>。版权归作者所有</p>
+</blockquote>
+<h1 id="iOS7-topLayoutGuide-bottomLayoutGuide"><a href="#iOS7-topLayoutGuide-bottomLayoutGuide" class="headerlink" title="iOS7 topLayoutGuide/bottomLayoutGuide"></a>iOS7 topLayoutGuide/bottomLayoutGuide</h1><p>创建一个叫做LayoutGuideStudy的工程，我们打开看一下Main.storyboard：</p>
+<p><img src="1.png" alt="1"></p>
+<p>可以看到 View Controller 下面出现 <code>topLayoutGuide/bottomLayoutGuide</code> 这两个东西，并且和 Controller 的 View 处于同一层级。并且在 <code>UIViewController</code> 头文件里面,这两个属性是 id 类型遵守一个 <code>UILayoutSupport</code> 协议并且是只读的属性</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// These objects may be used as layout items in the NSLayoutConstraint API</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>,<span class="keyword">strong</span>) <span class="keyword">id</span>&lt;<span class="built_in">UILayoutSupport</span>&gt; topLayoutGuide <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">7</span>_0);</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>,<span class="keyword">strong</span>) <span class="keyword">id</span>&lt;<span class="built_in">UILayoutSupport</span>&gt; bottomLayoutGuide <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">7</span>_0);</span><br></pre></td></tr></table></figure>
+
+<p>这就说明了这两个 LayoutGuide 是系统自动创建并管理的，这也解释了刚刚我们创建的工程里面 <code>Main.storyboard</code> 为什么会自动出现 <code>topLayoutGuide/bottomLayoutGuide</code>。</p>
+<h2 id="Demo-amp-探索"><a href="#Demo-amp-探索" class="headerlink" title="Demo&amp;探索"></a>Demo&amp;探索</h2><p>我们拖拽一个红色的 <code>UIView</code> 到 Controller 的 view 里，添加约束的时候，注意到是右下角的约束设定框，关于顶部约束的基准 view 下拉选择，XCode 默认勾选了 <code>Top Layout Guide</code></p>
+<p><img src="2.png" alt="2"></p>
+<p>添加完宽高约束，最后约束如下所示</p>
+<p><img src="3.png" alt="3"></p>
+<p>运行结果如下</p>
+<p><img src="4.png" alt="4"></p>
+<p>可以看出 top 约束基于系统提供的 topLayoutGuide，系统会自动为这个 view 避开顶部状态栏。我们在 ViewController 里面打印红色 view</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;UIView: <span class="number">0x7ff10860fa90</span>; frame = (<span class="number">0</span> <span class="number">20</span>; <span class="number">240</span> <span class="number">128</span>); <span class="built_in">auto</span>resize = RM+BM; layer = &lt;CALayer: <span class="number">0x60000003b5c0</span>&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>看到红色 view 的 y 值就是 20。刚好是状态栏的高度。由此看出 Top Layout Guide 的作用就是在进行自动布局的时候，帮助开发者隔离出状态栏的空间。那么我们再看看导航控制器（顶部出现导航栏）的情况</p>
+<p><img src="5.png" alt="5"></p>
+<p>运行结果如下</p>
+<p><img src="6.png" alt="6"></p>
+<p>Top Layout Guide 同样自动帮助隔离出状态栏 + 导航栏。<br>在ViewController里面打印黄色view</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;UIView: <span class="number">0x7fb04fe08040</span>; frame = (<span class="number">0</span> <span class="number">64</span>; <span class="number">240</span> <span class="number">128</span>); <span class="built_in">auto</span>resize = RM+BM; layer = &lt;CALayer: <span class="number">0x61800003ef60</span>&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>看到黄色 view 的 y 值就是 64。刚好是状态栏 + 导航栏的高度。</p>
+<p>同理，<code>bottomLayoutGuide</code> 就是用于在 TabbarController 里面隔离底部的 tabbar</p>
+<p><img src="7.png" alt="7"></p>
+<h2 id="扒一扒-topLayoutGuide-bottomLayoutGuide-对象"><a href="#扒一扒-topLayoutGuide-bottomLayoutGuide-对象" class="headerlink" title="扒一扒 topLayoutGuide/bottomLayoutGuide 对象"></a>扒一扒 topLayoutGuide/bottomLayoutGuide 对象</h2><p>在UIViewController的viewDidLayoutSubviews方法打印</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLayoutSubviews</span><br><span class="line"> &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLayoutSubviews];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"topLayoutGuide-%@"</span>,<span class="keyword">self</span>.topLayoutGuide);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"bottomLayoutGuide-%@"</span>,<span class="keyword">self</span>.bottomLayoutGuide);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">topLayoutGuide-</span></span><br><span class="line"><span class="string">&lt;_UILayoutGuide:</span> <span class="number">0x7fd7cce0c350</span><span class="string">;</span> <span class="string">frame</span> <span class="string">=</span> <span class="string">(0</span> <span class="number">0</span><span class="string">;</span> <span class="number">0</span> <span class="number">64</span><span class="string">);</span> <span class="string">hidden</span> <span class="string">=</span> <span class="literal">YES</span><span class="string">;</span> <span class="string">layer</span> <span class="string">=</span> <span class="string">&lt;CALayer:</span> <span class="number">0x61000003f2c0</span><span class="string">&gt;&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="string">bottomLayoutGuide-</span></span><br><span class="line"><span class="string">&lt;_UILayoutGuide:</span> <span class="number">0x7fd7cce0d6b0</span><span class="string">;</span> <span class="string">frame</span> <span class="string">=</span> <span class="string">(0</span> <span class="number">667</span><span class="string">;</span> <span class="number">0</span> <span class="number">0</span><span class="string">);</span> <span class="string">hidden</span> <span class="string">=</span> <span class="literal">YES</span><span class="string">;</span> <span class="string">layer</span> <span class="string">=</span> <span class="string">&lt;CALayer:</span> <span class="number">0x610000221620</span><span class="string">&gt;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个是 <code>_UILayoutGuide</code> 类型的私有对象，看起来里面有 frame，hidden，layer 属性，感觉十分像 <code>UIView</code> 啊，那我们就验证一下</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([<span class="keyword">self</span>.topLayoutGuide isKindOfClass:[<span class="built_in">UIView</span> <span class="keyword">class</span>]]) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"topLayoutGuide is an UIView"</span>);</span><br><span class="line">&#125;</span><br><span class="line"> <span class="keyword">if</span> ([<span class="keyword">self</span>.bottomLayoutGuide isKindOfClass:[<span class="built_in">UIView</span> <span class="keyword">class</span>]]) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"bottomLayoutGuide is an UIView"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印结果</span></span><br><span class="line">topLayoutGuide is an <span class="built_in">UIView</span></span><br><span class="line">bottomLayoutGuide is an <span class="built_in">UIView</span></span><br></pre></td></tr></table></figure>
+
+<p>得到结论就是 topLayoutGuide/bottomLayoutGuide 其实是一个 <code>UIView</code> 类型的对象。<br>我们再打印一下 <code>UIViewController</code> 的 view 的 subviews</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">- (void)viewDidLayoutSubviews</span></span><br><span class="line"><span class="xml"> &#123;</span></span><br><span class="line"><span class="xml">    [super viewDidLayoutSubviews];</span></span><br><span class="line"><span class="xml">     NSLog(@"viewController view subViews %@",self.view.subviews);</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">// 结果如下</span></span><br><span class="line"></span><br><span class="line"><span class="xml">viewController view subViews (</span></span><br><span class="line"><span class="xml">    "<span class="tag">&lt;<span class="name">UIView:</span> <span class="attr">0x7ffc774035b0</span>; <span class="attr">frame</span> = <span class="string">(0</span> <span class="attr">64</span>; <span class="attr">240</span> <span class="attr">128</span>); <span class="attr">autoresize</span> = <span class="string">RM+BM;</span> <span class="attr">layer</span> = &lt;<span class="attr">CALayer:</span> <span class="attr">0x60800002c720</span>&gt;</span>&gt;",</span></span><br><span class="line"><span class="xml">    "<span class="tag">&lt;<span class="name">_UILayoutGuide:</span> <span class="attr">0x7ffc7740ae10</span>; <span class="attr">frame</span> = <span class="string">(0</span> <span class="attr">0</span>; <span class="attr">0</span> <span class="attr">64</span>); <span class="attr">hidden</span> = <span class="string">YES;</span> <span class="attr">layer</span> = &lt;<span class="attr">CALayer:</span> <span class="attr">0x60800002c480</span>&gt;</span>&gt;",</span></span><br><span class="line"><span class="xml">    "<span class="tag">&lt;<span class="name">_UILayoutGuide:</span> <span class="attr">0x7ffc7740b1e0</span>; <span class="attr">frame</span> = <span class="string">(0</span> <span class="attr">667</span>; <span class="attr">0</span> <span class="attr">0</span>); <span class="attr">hidden</span> = <span class="string">YES;</span> <span class="attr">layer</span> = &lt;<span class="attr">CALayer:</span> <span class="attr">0x60800002b820</span>&gt;</span>&gt;"</span></span><br><span class="line"><span class="xml">)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>topLayoutGuide/bottomLayoutGuide 其实是作为虚拟的占坑 view，用于在自动布局的时候帮助开发者避开顶部的状态栏，导航栏以及底部的 tabbar 等。</p>
+<h1 id="iOS9-UILayoutGuide"><a href="#iOS9-UILayoutGuide" class="headerlink" title="iOS9 UILayoutGuide"></a>iOS9 UILayoutGuide</h1><p>iOS9开始，苹果新增加了一个UILayoutGuide的类，看看苹果官方对它的解释</p>
+<blockquote>
+<p>The UILayoutGuide class defines a rectangular area that can interact with Auto Layout.<br>Use layout guides to replace the dummy views you may have created to represent<br>inter-view spaces or encapsulation in your user interface</p>
+</blockquote>
+<p>大概意思是 <code>UILayoutGuide</code> 用于提供一个矩形区域可以用 Auto Layout 来定制一些约束特性，作为一个虚拟的 view 使用。<br>我想大概是苹果的工程师觉得以前的 topLayoutGuide/bottomLayoutGuide 提供虚拟占坑 view，隔离导航栏/tabber的思想不错，进而有了启发，能不能让整个 LayoutGuide 变得更灵活，让开发者能够自由定制，于是这个 `UILayoutGuide 类就设计出来了</p>
+<p>那么如何自由定制一个 UILayoutGuide，我们看看这个类的几个属性</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutXAxisAnchor</span> *leadingAnchor;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutXAxisAnchor</span> *trailingAnchor;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutXAxisAnchor</span> *leftAnchor;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutXAxisAnchor</span> *rightAnchor;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutYAxisAnchor</span> *topAnchor;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutYAxisAnchor</span> *bottomAnchor;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutDimension</span> *widthAnchor;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutDimension</span> *heightAnchor;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutXAxisAnchor</span> *centerXAnchor;</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutYAxisAnchor</span> *centerYAnchor;</span><br></pre></td></tr></table></figure>
+
+<p><code>NSLayoutXAxisAnchor</code>，<code>NSLayoutYAxisAnchor</code>，<code>NSLayoutDimension</code> 这几个类也是跟随 <code>UILayoutGuide</code> 在 iOS9 以后新增的，即便很陌生，但我们看上面 <code>UILayoutGuide</code> 的几个属性里面leading，trailing，top，bottom，center 等熟悉的字眼，就能明白这些属性就是用于给 <code>UILayoutGuide</code> 对象增加布局约束的。</p>
+<p>我们在看UIView里面新增的一个分类</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">UIView</span> (<span class="title">UIViewLayoutConstraintCreation</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutXAxisAnchor</span> *leadingAnchor <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">9</span>_0);</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutXAxisAnchor</span> *trailingAnchor <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">9</span>_0);</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutXAxisAnchor</span> *leftAnchor <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">9</span>_0);</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutXAxisAnchor</span> *rightAnchor <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">9</span>_0);</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutYAxisAnchor</span> *topAnchor <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">9</span>_0);</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutYAxisAnchor</span> *bottomAnchor <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">9</span>_0);</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutDimension</span> *widthAnchor <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">9</span>_0);</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutDimension</span> *heightAnchor <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">9</span>_0);</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutXAxisAnchor</span> *centerXAnchor <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">9</span>_0);</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutYAxisAnchor</span> *centerYAnchor <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">9</span>_0);</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutYAxisAnchor</span> *firstBaselineAnchor <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">9</span>_0);</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">readonly</span>, <span class="keyword">strong</span>) <span class="built_in">NSLayoutYAxisAnchor</span> *lastBaselineAnchor <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">9</span>_0);</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+
+<p>也是跟 <code>UILayoutGuide</code> 一样的提供了一致的属性。这就说明了 <code>UILayoutGuide</code> 是可以跟 <code>UIView</code> 进行 Auto Layout 的约束交互的。</p>
+<h2 id="Demo-amp-探索-1"><a href="#Demo-amp-探索-1" class="headerlink" title="Demo&amp;探索"></a>Demo&amp;探索</h2><p>创建一个 <code>UILayoutGuide</code>，约束它距离控制器view的顶部 64，左边 0，宽 250，高 200，于是在 viewDidLoad 方法里面的代码</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建</span></span><br><span class="line"><span class="built_in">UILayoutGuide</span> *layoutGuide = [[<span class="built_in">UILayoutGuide</span> alloc] init];</span><br><span class="line"><span class="comment">// 需要使用UIView的addLayoutGuide方法添加新建的layoutGuide</span></span><br><span class="line">[<span class="keyword">self</span>.view addLayoutGuide:layoutGuide];</span><br><span class="line"><span class="comment">// 正式的约束代码</span></span><br><span class="line">[layoutGuide.topAnchor constraintEqualToAnchor:<span class="keyword">self</span>.view.topAnchor constant:<span class="number">64</span>].active = <span class="literal">YES</span>;</span><br><span class="line">[layoutGuide.leadingAnchor constraintEqualToAnchor:<span class="keyword">self</span>.view.leadingAnchor].active = <span class="literal">YES</span>;</span><br><span class="line">[layoutGuide.widthAnchor constraintEqualToConstant:<span class="number">250</span>].active = <span class="literal">YES</span>;</span><br><span class="line">[layoutGuide.heightAnchor constraintEqualToConstant:<span class="number">200</span>].active = <span class="literal">YES</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这样约束代码明显比使用 NSLayoutConstraint 简洁多了。</p>
+<p>接着，我们再创建一个紫色 view，基于这个创建的 layoutGuide 进行约束，紫色 view 顶部距离上述 layoutGuide 底部 20，和 layoutGuide 左对齐，宽和高和 layoutGuide 保持一致</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">UIView</span> <span class="string">*viewBaseLayoutGuide</span> <span class="string">=</span> <span class="string">[[UIView</span> <span class="string">alloc]</span> <span class="string">init];</span></span><br><span class="line"><span class="string">viewBaseLayoutGuide.translatesAutoresizingMaskIntoConstraints</span> <span class="string">=</span> <span class="literal">NO</span><span class="string">;</span></span><br><span class="line"><span class="string">viewBaseLayoutGuide.backgroundColor</span> <span class="string">=</span> <span class="string">[UIColor</span> <span class="string">purpleColor];</span></span><br><span class="line"><span class="string">[self.view</span> <span class="string">addSubview:viewBaseLayoutGuide];</span></span><br><span class="line"></span><br><span class="line"><span class="string">[viewBaseLayoutGuide.topAnchor</span> <span class="string">constraintEqualToAnchor:layoutGuide.bottomAnchor</span> <span class="string">constant:20].active</span> <span class="string">=</span> <span class="literal">YES</span><span class="string">;</span></span><br><span class="line"><span class="string">[viewBaseLayoutGuide.leadingAnchor</span> <span class="string">constraintEqualToAnchor:layoutGuide.leadingAnchor].active</span> <span class="string">=</span> <span class="literal">YES</span><span class="string">;</span></span><br><span class="line"><span class="string">[viewBaseLayoutGuide.widthAnchor</span> <span class="string">constraintEqualToAnchor:layoutGuide.widthAnchor].active</span> <span class="string">=</span> <span class="literal">YES</span><span class="string">;</span></span><br><span class="line"><span class="string">[viewBaseLayoutGuide.heightAnchor</span> <span class="string">constraintEqualToAnchor:layoutGuide.heightAnchor].active</span> <span class="string">=</span> <span class="literal">YES</span><span class="string">;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下</p>
+<p><img src="8.png" alt="8"></p>
+<h1 id="iOS11-Safe-Area-safeAreaLayoutGuide"><a href="#iOS11-Safe-Area-safeAreaLayoutGuide" class="headerlink" title="iOS11 Safe Area / safeAreaLayoutGuide"></a>iOS11 Safe Area / safeAreaLayoutGuide</h1><p>iOS11 又引入了一个 Safe Area（安全区域）的概念，苹果建议在这个安全区域内放置 UI 控件。这个安全区域的范围其实就是整个屏幕隔离出状态栏，导航栏，tabar，以及 iPhone X 顶部刘海，底部虚拟 home 手势区域的范围。</p>
+<p>从这个介绍可以看得出，所谓的 Safe Area 其实也就是升级版本的 topLayoutGuide/bottomLayoutGuide，以前只能限制 top/bottom 的 Layout，现在更加强大了。</p>
+<p>再看一下 <code>UIViewController</code> 头文件：（用 XCode 9 以上版本打开）</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>,<span class="keyword">strong</span>) <span class="keyword">id</span>&lt;<span class="built_in">UILayoutSupport</span>&gt; topLayoutGuide API_DEPRECATED_WITH_REPLACEMENT(<span class="string">"-[UIView safeAreaLayoutGuide]"</span>, ios(<span class="number">7.0</span>,<span class="number">11.0</span>), tvos(<span class="number">7.0</span>,<span class="number">11.0</span>));</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>,<span class="keyword">strong</span>) <span class="keyword">id</span>&lt;<span class="built_in">UILayoutSupport</span>&gt; bottomLayoutGuide API_DEPRECATED_WITH_REPLACEMENT(<span class="string">"-[UIView safeAreaLayoutGuide]"</span>, ios(<span class="number">7.0</span>,<span class="number">11.0</span>), tvos(<span class="number">7.0</span>,<span class="number">11.0</span>));</span><br></pre></td></tr></table></figure>
+
+<p>苹果提示 topLayoutGuide/bottomLayoutGuide 这两个属性在 iOS11 已经过期，推荐使用 UIView 的 safeAreaLayoutGuide 属性（safeAreaLayoutGuide 稍后会介绍）。</p>
+<p>另外用 XCode9 以上版本创建工程的时候，Main.storyboard 会默认选择 <code>Use Safe Area Layout Guides</code>，控制器 view 下面会出现 safe area</p>
+<p><img src="9.png" alt="9"></p>
+<h2 id="Demo-amp-探索-2"><a href="#Demo-amp-探索-2" class="headerlink" title="Demo&amp;探索"></a>Demo&amp;探索</h2><p>如上图所示，我们基于 storyboard 提供的控制器 view 的 safeArea 区域对红色的 view 进行约束：顶部距离安全区域 0，左边距离安全区域 0，宽 240，高 180</p>
+<p><img src="10.png" alt="10"></p>
+<p>运行结果如下</p>
+<p><img src="11.png" alt="11"></p>
+<p>为了验证 Safe Area 在竖屏 iPhone X 底部起到的隔离作用，又增加了一个棕色的 view：左边距离安全区域 0，底部距离安全区域 0，宽 240，高 180</p>
+<p><img src="12.png" alt="12"></p>
+<p>运行结果如下</p>
+<p><img src="13.png" alt="13"></p>
+<p>利用安全区域进行 Auto Layout 布局，分别在 iPhone 8，iPhone X 上以及避开了状态栏/刘海/底部的 home 虚拟手势区域，使得开发者不用关心状态栏以及适配 iPhone X 避开刘海的高度，只需要安安心心的苹果指定的这个安全区域放置子控件，布局就可以了。</p>
+<h2 id="UIView-的safeAreaLayoutGuide属性"><a href="#UIView-的safeAreaLayoutGuide属性" class="headerlink" title="UIView 的safeAreaLayoutGuide属性"></a>UIView 的safeAreaLayoutGuide属性</h2><p>查看 UIView 在 iOS11 上关于 Safe Area 新增的两个属性</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>) <span class="built_in">UIEdgeInsets</span> safeAreaInsets API_AVAILABLE(ios(<span class="number">11.0</span>),tvos(<span class="number">11.0</span>));</span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>,<span class="keyword">strong</span>) <span class="built_in">UILayoutGuide</span> *safeAreaLayoutGuide API_AVAILABLE(ios(<span class="number">11.0</span>),tvos(<span class="number">11.0</span>));</span><br></pre></td></tr></table></figure>
+
+<p>很明显这个只读的 safeAreaLayoutGuide 属性是系统自动创建的，可以让开发者用代码进行基于安全区域进行自动布局。<br>点击控制器的 view 触发 touchesBegan 进行打印验证：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"safeAreaInsets %@"</span>,<span class="built_in">NSStringFromUIEdgeInsets</span>(<span class="keyword">self</span>.view.safeAreaInsets));</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"safeAreaGuide %@"</span>,<span class="keyword">self</span>.view.safeAreaLayoutGuide);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打印结果</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">safeAreaInsets &#123;<span class="number">44</span>, <span class="number">0</span>, <span class="number">34</span>, <span class="number">0</span>&#125;</span><br><span class="line">safeAreaGuide &lt;UILayoutGuide: <span class="number">0x6080009a3c60</span> - <span class="string">"UIViewSafeAreaLayoutGuide"</span>,</span><br><span class="line">layoutFrame = &#123;&#123;<span class="number">0</span>, <span class="number">44</span>&#125;, &#123;<span class="number">375</span>, <span class="number">734</span>&#125;&#125;, owningView = &lt;UIView: <span class="number">0x7f888240c3b0</span>; frame = (<span class="number">0</span> <span class="number">0</span>; <span class="number">375</span> <span class="number">812</span>); </span><br><span class="line"><span class="built_in">auto</span>resize = W+H; layer = &lt;CALayer: <span class="number">0x608000431ec0</span>&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>根据打印结果 safeAreaInsets.top=44，刚好是苹果规定的适配 iPhone X 要避开的刘海的距离，safeAreaInsets.bottom=34，刚好是底部的 home 虚拟手势区域的高度。</p>
+<p>进行横屏切换后</p>
+<p><img src="14.png" alt="14"></p>
+<p>再次点击控制器的 view 触发 touchesBegan 进行打印验证，打印结果：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">safeAreaInsets &#123;<span class="number">0</span>, <span class="number">44</span>, <span class="number">21</span>, <span class="number">44</span>&#125;</span><br><span class="line">safeAreaGuide &lt;UILayoutGuide: <span class="number">0x6080009a3c60</span> - <span class="string">"UIViewSafeAreaLayoutGuide"</span>, layoutFrame =</span><br><span class="line">&#123;&#123;<span class="number">44</span>, <span class="number">0</span>&#125;, &#123;<span class="number">724</span>, <span class="number">354</span>&#125;&#125;, owningView = &lt;UIView: <span class="number">0x7f888240c3b0</span>; frame = (<span class="number">0</span> <span class="number">0</span>; <span class="number">812</span> <span class="number">375</span>); <span class="built_in">auto</span>resize =</span><br><span class="line">W+H; layer = &lt;CALayer: <span class="number">0x608000431ec0</span>&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>旋转之后，safeAreaInsets.left 距离刘海隔离区域依然是 44，底部的 home 虚拟手势区域变成了 21。由此证明，系统也把屏幕旋转的情况也自动计算好了。</p>
+<p><img src="15.png" alt="15"></p>
+<h2 id="iOS-11-0-之后系统新增安全区域变化方法"><a href="#iOS-11-0-之后系统新增安全区域变化方法" class="headerlink" title="iOS 11.0 之后系统新增安全区域变化方法"></a>iOS 11.0 之后系统新增安全区域变化方法</h2><p>UIViewController中新增：</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="name">void</span>)viewSafeAreaInsetsDidChange<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p>UIView中新增：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewSafeAreaInsetsDidChange；</span><br></pre></td></tr></table></figure>
+
+<p>如果屏幕旋转，相应的安全区域也会变化，所以不比担心。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewSafeAreaInsetsDidChange &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewSafeAreaInsetsDidChange];</span><br><span class="line">     </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"viewSafeAreaInsetsDidChange-%@"</span>,<span class="built_in">NSStringFromUIEdgeInsets</span>(<span class="keyword">self</span>.view.safeAreaInsets));</span><br><span class="line">     </span><br><span class="line">    [<span class="keyword">self</span> updateOrientation];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 更新屏幕safearea frame</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">- (<span class="keyword">void</span>)updateOrientation &#123;</span><br><span class="line">    <span class="keyword">if</span> (@available(iOS <span class="number">11.0</span>, *)) &#123;</span><br><span class="line">        <span class="built_in">CGRect</span> frame = <span class="keyword">self</span>.customerView.frame;</span><br><span class="line">        frame.origin.x = <span class="keyword">self</span>.view.safeAreaInsets.left;</span><br><span class="line">        frame.size.width = <span class="keyword">self</span>.view.frame.size.width - <span class="keyword">self</span>.view.safeAreaInsets.left - <span class="keyword">self</span>.view.safeAreaInsets.right;</span><br><span class="line">        frame.size.height = <span class="keyword">self</span>.view.frame.size.height - <span class="keyword">self</span>.view.safeAreaInsets.bottom;</span><br><span class="line">        <span class="keyword">self</span>.customerView.frame = frame;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Fallback on earlier versions</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="16.gif" alt="16"></p>
+<h2 id="UIScrollView-UICollectionView"><a href="#UIScrollView-UICollectionView" class="headerlink" title="UIScrollView/UICollectionView"></a>UIScrollView/UICollectionView</h2><p>在 iOS11 上所有 UIScrollView 及其子类默认会把内容放到 Safe Area 范围内，导致顶部会有空白区域或者 Cell 不能顶到屏幕最上面。为此，iOS 新增了方法来约束在 <code>UIScrollView</code> 上如何适配 Safe Area</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span>(nonatomic) UIScrollViewContentInsetAdjustmentBehavior contentInsetAdjustmentBehavior API_AVAILABLE(ios(<span class="number">11.0</span>),tvos(<span class="number">11.0</span>));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, <span class="built_in">UIScrollViewContentInsetAdjustmentBehavior</span>) &#123;</span><br><span class="line">    <span class="built_in">UIScrollViewContentInsetAdjustmentAutomatic</span>, <span class="comment">// Similar to .scrollableAxes, but for backward compatibility will also adjust the top &amp; bottom contentInset when the scroll view is owned by a view controller with automaticallyAdjustsScrollViewInsets = YES inside a navigation controller, regardless of whether the scroll view is scrollable</span></span><br><span class="line">    <span class="built_in">UIScrollViewContentInsetAdjustmentScrollableAxes</span>, <span class="comment">// Edges for scrollable axes are adjusted (i.e., contentSize.width/height &gt; frame.size.width/height or alwaysBounceHorizontal/Vertical = YES)</span></span><br><span class="line">    <span class="built_in">UIScrollViewContentInsetAdjustmentNever</span>, <span class="comment">// contentInset is not adjusted</span></span><br><span class="line">    <span class="built_in">UIScrollViewContentInsetAdjustmentAlways</span>, <span class="comment">// contentInset is always adjusted by the scroll view's safeAreaInsets</span></span><br><span class="line">&#125; API_AVAILABLE(ios(<span class="number">11.0</span>),tvos(<span class="number">11.0</span>));</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h1><p>这次为了适配 iPhone X，个人从一开始看到 iOS11 的 Safe Area 这个概念，追溯到 iOS7 topLayoutGuide/bottomLayoutGuide，从头开始学习，受益匪浅。也体会到了苹果工程师针对 UI 适配，面向开发者进行的一系列探索，以及优化的心路历程。也看到了他们如何将一个好的思路，面对当前的需求变化，进行合理的扩展，设计出的灵活可扩展的 API：</p>
+<p>1.iOS7: topLayoutGuide/bottomLayoutGuide，利用一个虚拟的 view 初步解决导航栏，tabbar 的隔离问题。</p>
+<p>2.iOS9:有了虚拟 view 的思路,又考虑能不能去除 top/bottom 概念的局限性，让开发者都可以灵活自定义这个隔离区域，又提供一些更方便简洁易懂的API方便进行代码自动布局，于是有了 UILayoutGuide 这个类。</p>
+<p>3.两年后的 iOS11，有了 iPhone X，苹果工程师顺理成章的将他们在 iOS9 的探索成果利用起来，他们自定义了一个 UILayoutGuide，给开发者提供了一个只读属性的 safeAreaLayoutGuide，并且提出安全区域的概念。</p>
+
+            
+        </section>
+        <footer class="blog-post-page-tags">
+        
+			
+				
+			<a href="/web/tags/LayoutGuide/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">LayoutGuide</a>
+				
+			<a href="/web/tags/SafeArea/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">SafeArea</a>
+				
+			
+		
+        </footer>
+    </article>
+    <article class="blog-post-page-readmore">
+    	
+    	
+		
+
+		
+		
+			<a href="/web/2020/09/11/Git-%E6%9F%A5%E7%9C%8B%E5%8F%98%E6%9B%B4%E5%8E%86%E5%8F%B2/" class="blog-post-page-readmore-next" data-toggle="tooltip" data-placement="top" title="Git 查看变更历史">下一篇</a>
+		
+
+        <div style="clear: both;"></div>
+    </article>
+
+    <article class="blog-post-block blog-post-page-content">
+            <div class="row">
+            
+                <div class="col-md-4 col-sm-4 post-page-more-btn">
+                    <span  data-toggle="modal" data-target="#post-donate-content">
+                        <span id="post-donate-btn" class="btn btn-danger btn-block" data-toggle="tooltip" data-placement="top" title="如果您觉得本文还不错或者对您有帮助，可以考虑打赏一下作者哦">打赏本文</span>
+                    </span>
+                </div>
+                <div class="col-md-4 col-sm-4 post-page-more-btn">
+                    <span  data-toggle="modal" data-target="#post-qrcode-content">
+                        <span><span id="post-qrcode-btn" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="微信扫描二维码手机端查看本文及分享本文">二维码</span></span>
+                    </span>
+                </div>
+            </div>
+        <div class="post-more-function-br"></div>
+
+        <div class="modal fade" id="post-donate-content" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">打赏本文</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row post-donate-content">
+                            <div class="col-md-4">
+                                <p>支付宝</p>
+                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/alipay.jpg"/>
+                            </div>
+                            <div class="col-md-4">
+                                <p>微信</p>
+                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/wechat.png"/>
+                            </div>
+                            <div class="col-md-4">
+                                <p>财付通</p>
+                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/qqpay.png"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="post-qrcode-content" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">文章二维码</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row post-qrcode-content">
+                            <span class="post-qrcode-content-canvas"></span>
+                            <img class="post-qrcode-content-img no-lightbox" src=""/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // post QRcode
+            // 中文转码
+            function toUtf8(str) {
+                var out, i, len, c;
+                out = "";
+                len = str.length;
+                for (i = 0; i < len; i++) {
+                    c = str.charCodeAt(i);
+                    if ((c >= 0x0001) && (c <= 0x007F)) {
+                        out += str.charAt(i);
+                    } else if (c > 0x07FF) {
+                        out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                        out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
+                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                    } else {
+                        out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
+                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                    }
+                }
+                return out;
+            }
+            // 生成
+            var qrcode= $('.post-qrcode-content-canvas').qrcode({width: 150,height: 150,text: toUtf8("https://joriwang.github.io/web/2020/09/17/%E3%80%90%E8%BD%AC%E3%80%91%E4%BB%8E-LayoutGuide-%E5%88%B0Safe-Area/")}).hide();
+            var canvas=qrcode.find('canvas').get(0);
+            $('.post-qrcode-content-img').attr('src',canvas.toDataURL('image/jpg'));
+        </script>
+
+        
+    </article>
+    
+</div>
+
+                
+            <footer class="blog-footer">
+                <p class="blog-footer-left">Copyright ©  2020 <a href="https://joriwang.github.io/web">Hello Skill</a></p>
+                <p class="blog-footer-right">Powered by <a href="https://hexo.io" target="_blank">Hexo</a>,Theme <a href="https://note.isweic.com/themes-life/" target="_blank">Life</a></p>
+            </footer>
+        </div><!--博客主栏结束-->
+        <!--博客侧边栏开始-->
+        <div class="col-xl-3 blog-sidebar">
+            <div class="blog-sidebar-title">
+                <a href="">Hello Skill</a>
+            </div>
+            <div class="blog-sidebar-logo">
+                <img src="http://dl.weic96.cn/logo.png">
+            </div>
+            <div class="blog-sidebar-count blog-sidebar-padding">
+                <div class="blog-sidebar-count-left">
+                    <p class="blog-sidebar-count-p">20</p>
+                    <span class="blog-sidebar-count-span">文章</span>
+                </div>
+                <div class="blog-sidebar-count-right">
+                    <p class="blog-sidebar-count-p">20</p>
+                    <span class="blog-sidebar-count-span">标签</span>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="blog-sidebar-icon blog-sidebar-padding">
+                <ul>
+                    <li><a href="https://github.com/joriwang/" class="icon-github" target="_blank" data-toggle="tooltip" data-placement="top" title="Github"><i class="fa fa-github"></i></a></li>
+                    <li><a href="" class="icon-weibo" target="_blank" data-toggle="tooltip" data-placement="top" title="新浪微博"><i class="fa fa-weibo"></i></a></li>
+                    <li><a href="" class="icon-twitter" target="_blank" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                    <!--<li><a href="" class="icon-facebook" target="_blank" data-toggle="tooltip" data-placement="top" title="FaceBook"><i class="fa fa-facebook"></i></a></li>-->
+                    <li><a href="mailto:463398425@qq.com" class="icon-email" data-toggle="tooltip" data-placement="top" title="E-Mail"><i class="fa fa-envelope"></i></a></li>
+                    <li><a href="" class="icon-rss" data-toggle="tooltip" target="_blank" data-placement="top" title="RSS"><i class="fa fa-rss"></i></a></li>
+                </ul>
+            </div>
+            <div class="blog-sidebar-categories">
+                <h4 class="blog-sidebar-h4"><i class="fa fa-folder-open"></i>&nbsp;文章分类</h4>
+                <ul class="list-group blog-sidebar-padding">
+                  
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/Android/">Android</a>
+                          <span class="badge badge-default badge-pill">3</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/iOS/">iOS</a>
+                          <span class="badge badge-default badge-pill">8</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/git/">git</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/GitHub/">GitHub</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/xcode/">xcode</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/itms/">itms</a>
+                          <span class="badge badge-default badge-pill">2</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E5%B9%B3%E5%8F%B0%E5%B7%A5%E5%85%B7/">平台工具</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/iOS/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                  
+                </ul>
+            </div>
+            <div class="blog-sidebar-tags">
+                <h4 class="blog-sidebar-h4"><i class="fa fa-tag"></i>&nbsp;标签云</h4>
+                <ul class="blog-sidebar-tags-ul blog-sidebar-padding">
+                  
+                    
+                      <li><a href="/web/tags/Android-%E5%83%8F%E7%B4%A0%E5%AF%86%E5%BA%A6/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Android 像素密度">Android 像素密度</a></li>
+                    
+                      <li><a href="/web/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="tag-could" data-toggle="tooltip" data-placement="top" title="生命周期">生命周期</a></li>
+                    
+                      <li><a href="/web/tags/Android/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Android">Android</a></li>
+                    
+                      <li><a href="/web/tags/APK/" class="tag-could" data-toggle="tooltip" data-placement="top" title="APK">APK</a></li>
+                    
+                      <li><a href="/web/tags/cocoapods/" class="tag-could" data-toggle="tooltip" data-placement="top" title="cocoapods">cocoapods</a></li>
+                    
+                      <li><a href="/web/tags/xcode/" class="tag-could" data-toggle="tooltip" data-placement="top" title="xcode">xcode</a></li>
+                    
+                      <li><a href="/web/tags/iMessage/" class="tag-could" data-toggle="tooltip" data-placement="top" title="iMessage">iMessage</a></li>
+                    
+                      <li><a href="/web/tags/APNS/" class="tag-could" data-toggle="tooltip" data-placement="top" title="APNS">APNS</a></li>
+                    
+                      <li><a href="/web/tags/itms/" class="tag-could" data-toggle="tooltip" data-placement="top" title="itms">itms</a></li>
+                    
+                      <li><a href="/web/tags/OC/" class="tag-could" data-toggle="tooltip" data-placement="top" title="OC">OC</a></li>
+                    
+                      <li><a href="/web/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="tag-could" data-toggle="tooltip" data-placement="top" title="开发工具">开发工具</a></li>
+                    
+                      <li><a href="/web/tags/APP%E5%BC%80%E5%8F%91%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B/" class="tag-could" data-toggle="tooltip" data-placement="top" title="APP开发大致流程">APP开发大致流程</a></li>
+                    
+                      <li><a href="/web/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="tag-could" data-toggle="tooltip" data-placement="top" title="线性代数">线性代数</a></li>
+                    
+                      <li><a href="/web/tags/%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" class="tag-could" data-toggle="tooltip" data-placement="top" title="视频相关概念">视频相关概念</a></li>
+                    
+                      <li><a href="/web/tags/FFmpeg/" class="tag-could" data-toggle="tooltip" data-placement="top" title="FFmpeg">FFmpeg</a></li>
+                    
+                      <li><a href="/web/tags/LivePhoto/" class="tag-could" data-toggle="tooltip" data-placement="top" title="LivePhoto">LivePhoto</a></li>
+                    
+                      <li><a href="/web/tags/Universal-Link/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Universal Link">Universal Link</a></li>
+                    
+                      <li><a href="/web/tags/Deep-Link/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Deep Link">Deep Link</a></li>
+                    
+                      <li><a href="/web/tags/LayoutGuide/" class="tag-could" data-toggle="tooltip" data-placement="top" title="LayoutGuide">LayoutGuide</a></li>
+                    
+                      <li><a href="/web/tags/SafeArea/" class="tag-could" data-toggle="tooltip" data-placement="top" title="SafeArea">SafeArea</a></li>
+                    
+                  
+                </ul>
+            </div>
+            <script>
+              // 博客侧栏标签云随机色
+              var tag_cloud = $('.tag-could');
+              tag_cloud.each(function () {
+                  var Cnum = 9;
+                  var Crand = parseInt(Math.random() * Cnum);
+                  $(this).addClass("tag-could" + Crand);
+              })
+            </script>
+            <!--返回顶部按钮-->
+            <div class="retop">
+                <i class="fa fa-angle-up"></i>
+            </div>
+        </div><!--博客侧边栏结束-->
+    </div>
+</div>
+<script src="/web/js/LeanStatistics.min.js"></script>
+<script src="/web/js/Life.js"></script>
+<script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+    otherF();
+    LeanStatistics();
+    $(document).pjax('a', '#pjax-box', {fragment:'#pjax-box', timeout:8000}).on('pjax:complete', function() {
+      $('pre code').each(function(i, block){
+        hljs.highlightBlock(block);
+      })
+      $('code.hljs').each(function(i, block) {
+        hljs.lineNumbersBlock(block);
+      });
+      LeanStatistics();
+    }).on('pjax:start', function() { NProgress.start(); }).on('pjax:end',   function() {
+      NProgress.done();
+      otherF();
+    });
+</script>
+</body>
+</html>
