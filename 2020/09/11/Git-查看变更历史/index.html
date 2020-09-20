@@ -138,7 +138,7 @@
 <p>使用 <code>git blame a</code></p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c2 (author time <span class="number">1</span>) He <span class="keyword">is</span> clever.</span><br><span class="line">c1 (author time <span class="number">2</span>) perfect</span><br></pre></td></tr></table></figure>
 
-<p>使用 <code>--reverse</code> 可以追溯文件在指定的提交范围内最初的模样。所以 <code>git blame c1..c2 a</code> 的结果为</p>
+<p>使用 <code>--reverse</code> 格式为 <code>git blame --reverse startCommitId..endCommitId file</code> 可以追溯文件从 <code>startCommitId</code> 开始在哪个提交发生改变 。所以 <code>git blame c1..c2 a</code> 的结果为</p>
 <figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c1 (author <span class="built_in">time</span> <span class="number">1</span>) I am <span class="built_in">content</span>.</span><br><span class="line">c2 (author <span class="built_in">time</span> <span class="number">2</span>) perfect</span><br></pre></td></tr></table></figure>
 
 <p>说明第 2 行从 c1 到 c2 都没有变。第 1 行 从 c1 之后改变，改变前的内容为 <code>I am content</code></p>
