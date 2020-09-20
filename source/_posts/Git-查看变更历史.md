@@ -31,7 +31,7 @@ c2 (author time 1) He is clever.
 c1 (author time 2) perfect
 ```
 
-使用 `--reverse` 可以追溯文件在指定的提交范围内最初的模样。所以 `git blame c1..c2 a` 的结果为
+使用 `--reverse` 格式为 `git blame --reverse startCommitId..endCommitId file` 可以追溯文件从 `startCommitId` 开始在哪个提交发生改变 。所以 `git blame c1..c2 a` 的结果为
 
 ```
 c1 (author time 1) I am content.
