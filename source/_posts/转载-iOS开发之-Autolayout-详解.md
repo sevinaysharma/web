@@ -117,6 +117,7 @@ NSLayoutConstraint *b_consTop = [NSLayoutConstraint constraintWithItem:blueV att
 1. 对于两个同层级 view 之间的约束关系，添加到它们的父 view 上
 2. 对于两个不同层级 view 之间的约束关系，添加到他们最近的共同父 view 上
 3. 对于有层次关系的两个 view 之间的约束关系，添加到层次较高的父 view 上
+4. 通过设置 `NSLayoutConstraint` 的 `active` 为 `YES` 系统会自动将该约束添加到合适的 View；设置为 `NO`，系统会自动从对应的 View 上移除该约束
 
 # VFL
 
