@@ -141,6 +141,20 @@
 <p><strong>问题修复</strong></p>
 <p>在 delegate 中增加一个 <code>isScrolling</code> 属性。然后实现如下逻辑</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// WP 开头的方法是因为对 delegate 进行了封装和再分发。场景中使用的是 WP 开头的方法</span></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView &#123;</span><br><span class="line">    <span class="keyword">if</span> (!scrollView.isDragging &amp;&amp; !scrollView.decelerating &amp;&amp; !scrollView.tracking) &#123;</span><br><span class="line">        <span class="comment">// 刚初始化，没有进行任何滑动</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>.isScrolling) &#123;</span><br><span class="line">        <span class="comment">// 过滤连续的回调</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">self</span>.isScrolling = <span class="literal">YES</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>.delegate &amp;&amp; [<span class="keyword">self</span>.delegate respondsToSelector:<span class="keyword">@selector</span>(WPScrollViewDidBeginDragging:)]) &#123;</span><br><span class="line">        [<span class="keyword">self</span>.delegate WPScrollViewDidBeginMoving:scrollView];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)scrollViewDidEndDecelerating:(<span class="built_in">UIScrollView</span> *)scrollView &#123;</span><br><span class="line">    <span class="keyword">self</span>.isScrolling = <span class="literal">NO</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">self</span>.delegate &amp;&amp; [<span class="keyword">self</span>.delegate respondsToSelector:<span class="keyword">@selector</span>(WPScrollViewDidEndDecelerating:)])&#123;</span><br><span class="line">        [<span class="keyword">self</span>.delegate WPScrollViewDidEndMoving:scrollView];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="同时支持-iPhone、iPad-设置了仅支持-portrait-但在-iPad-上依然会根据屏幕旋转"><a href="#同时支持-iPhone、iPad-设置了仅支持-portrait-但在-iPad-上依然会根据屏幕旋转" class="headerlink" title="同时支持 iPhone、iPad 设置了仅支持 portrait 但在 iPad 上依然会根据屏幕旋转"></a>同时支持 iPhone、iPad 设置了仅支持 portrait 但在 iPad 上依然会根据屏幕旋转</h2><p><strong>问题描述</strong></p>
+<p>应用同时支持 iPhone、iPad。在设置中仅勾选了支持 Portrait。实际发现在 iPad 上依然会随屏幕旋转。</p>
+<p><strong>问题探索</strong></p>
+<p>刚开始是怀疑苹果新增了控制参数或 API，通过设置 UIViewController 和 Application 的 orientation 参数发现，页面不会旋转了，但是启动页依然会随屏幕旋转。</p>
+<p>经过一番查找资料，受一篇文章的启发，可能是漏设置了 iPad 上的参数。</p>
+<p><img src="1.png" alt="1.png"></p>
+<p>上图是默认看到的设置界面。当把 iPhone 取消后，你会发现下图的样子</p>
+<p><img src="2.png" alt="2"></p>
+<p>所以这是一个障眼法。通过修改配置会发现下图的修改</p>
+<p><img src="3.png" alt="3.png"></p>
+<p><strong>问题回顾</strong></p>
+<p>本质还是忽略了每个设备需要单独配置，这些配置包括但不限于国际化文件（string、xib等）、plist。不同设备以文件名区分。比如用于 iPad 的配置文件名格式为 <code>name~iPad.ext</code>。具体描述参考官方文档</p>
+
             
         </section>
         <footer class="blog-post-page-tags">
