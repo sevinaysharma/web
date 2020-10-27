@@ -120,3 +120,63 @@ else if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
     return @"";
 }
 ```
+
+# UI
+
+## 引导用户评论
+
+**跳转appStore评价页**
+
+```
+NSString  *nsStringToOpen = [NSString  stringWithFormat: @"itms-apps://itunes.apple.com/app/id%@?action=write-review",@"APPID"];  //替换为对应的APPID
+ 
+[[UIApplication sharedApplication] openURL:[NSURL URLWithString:nsStringToOpen]];
+```
+
+这种方式的好处是，会直接打开商店的评论页面，可以一次性完成打星和评论两个功能
+
+**APP 内部展示产品页评价**
+
+```
+// 1 . 引入
+#import <StoreKit/StoreKit.h>
+
+// 2 . 遵循 SKStoreProductViewControllerDelegate
+
+// 3 . 引入方法
+SKStoreProductViewController *storeProductViewContorller = [[SKStoreProductViewController alloc] init];
+    storeProductViewContorller.delegate = self;
+    //加载App Store视图展示
+    [storeProductViewContorller loadProductWithParameters:
+
+      @{SKStoreProductParameterITunesItemIdentifier : @"APPID"} completionBlock:^(BOOL result, NSError *error) {
+
+     if(error) {
+
+     } else {
+
+     //模态弹出appstore
+
+     [self presentViewController:storeProductViewContorller animated:YES completion:^{
+      }];
+      }
+}];
+
+// 4.实现SKStoreProductViewControllerDelegate代理方法
+(void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+```
+
+**应用内星级评价**
+
+```
+// 1. 引入
+#import <StoreKit/StoreKit.h>
+
+// 2. 实现方法
+[SKStoreReviewController requestReview];
+```
+
+这种方式的缺点是，整个流程由系统接管，不保证每次都能正常弹出
