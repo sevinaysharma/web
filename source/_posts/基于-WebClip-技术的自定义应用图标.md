@@ -135,6 +135,49 @@ openssl smime -sign -in webclip.mobileconfig -out webclip_signed.mobileconfig -s
 data:text/html;base64,PGh0bWwgbGFuZz0iemgiPjxoZWFkPjxtZXRhIGNoYXJzZXQ9IlVURi04Ij48bWV0YSBodHRwLWVxdWl2PSJjYWNoZS1jb250cm9sImNvbnRlbnQ9Im5vLWNhY2hlIi8+PG1ldGEgY29udGVudD0ieWVzIm5hbWU9ImFwcGxlLXRvdWNoLWZ1bGxzY3JlZW4iPjxtZXRhIGNvbnRlbnQ9InllcyJuYW1lPSJhcHBsZS1tb2JpbGUtd2ViLWFwcC1jYXBhYmxlIj48bWV0YSBjb250ZW50PSJ3aGl0ZSJuYW1lPSJhcHBsZS1tb2JpbGUtd2ViLWFwcC1zdGF0dXMtYmFyLXN0eWxlIj48bWV0YSBuYW1lPSJhcHBsZS1tb2JpbGUtd2ViLWFwcC1jYXBhYmxlImNvbnRlbnQ9InllcyI+PG1ldGEgbmFtZT0idmlld3BvcnQiY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCwgbWF4aW11bS1zY2FsZT0xLjAsIHVzZXItc2NhbGFibGU9bm8iPjx0aXRsZT7pl7Lpsbw8L3RpdGxlPjxsaW5rIHJlbD0iYXBwbGUtdG91Y2gtaWNvbi1wcmVjb21wb3NlZCIvPjxzY3JpcHQ+d2luZG93LnhfdGl0bGU9IumXsumxvCI7aWYod2luZG93LnhfdGl0bGU9PT0iICIpe2RvY3VtZW50LmdldEVsZW1lbnRzQnlUYWdOYW1lKCJ0aXRsZSIpWzBdLmlubmVyVGV4dD0iIn13aW5kb3cueF9pbWdQYXRoPSIiO3dpbmRvdy54X2xvY2tPclVybD0iZmxlYW1hcmtldDovLyI7d2luZG93LnhfcGFzcz0iSkdMYXVuY2hQYXNzIjt3aW5kb3cueF9pY29uPSJodHRwOi8vc2hhcmUtaW1nLm1haWJhYXBwLmNvbS9pb3Mvd2ViY2xpcC9hcHAvaWNvbi85ZDQ4NjViYTFlNWRkNjJjYTU0ZTE0MzM3MWVkM2RjYy0xMjIuanBnIjt3aW5kb3cueF90aGVtZT0i5Y2h6YCa6L+q5aOr5bC8Ijt2YXIgX2N6Yz1fY3pjfHxbXTs8L3NjcmlwdD48bGluayByZWw9InN0eWxlc2hlZXQiaHJlZj0iaHR0cDovL3NoYXJlLWltZy5tYWliYWFwcC5jb20vd2ViYXBwL3djcC9pMTMvaW5kZXguY3NzIi8+PC9oZWFkPjxib2R5PjxkaXYgaWQ9InJlcGxhY2VCb3giPjxkaXYgYWxpZ249ImNlbnRlciJpZD0iaWNvbnMiPjxkaXYgY2xhc3M9Imljb24iPjxpbWcgc3JjPSIiaWQ9InBpYyI+PGRpdiBpZD0idGV4dC10aXRsZSJjbGFzcz0idGV4dCI+SkdBUFBOYW1lPC9kaXY+PC9kaXY+PC9kaXY+PGRpdiBpZD0iYm90dG9tIj48L2Rpdj48L2Rpdj48ZGl2IGlkPSJsYXVuY2hCb3gic3R5bGU9ImRpc3BsYXk6IG5vbmU7Ij48ZGl2PjxkaXYgY2xhc3M9ImFwcC1pY29uIj48aW1nIGlkPSJhcHBJY29uInNyYz0iSkdMYXVuY2hBUFBJY29uIj48L2Rpdj48ZGl2IGNsYXNzPSJhcHAtbmFtZSJpZD0idGlwcyI+PGRpdj5sb2FkaW5nPHNwYW4gaWQ9ImFwcE5hbWUiPkpHTGF1bmNoQVBQTmFtZTwvc3Bhbj48L2Rpdj48L2Rpdj48ZGl2IGNsYXNzPSJsYXVuY2hpbmctbW92aWUiPjxpbWcgd2lkdGg9IjEwMCJzcmM9Imh0dHA6Ly9zaGFyZS1pbWcubWFpYmFhcHAuY29tL3dlYmFwcC93Y3AvaTEzL2xvYWRpbmcuZ2lmIj48L2Rpdj48L2Rpdj48L2Rpdj48aWZyYW1lIHN0eWxlPSJkaXNwbGF5OiBub25lOyJpZD0idHJhY2tFdmVudElmcmFtZSI+PC9pZnJhbWU+PHNjcmlwdD52YXIgZnJhbWVXaW49ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInRyYWNrRXZlbnRJZnJhbWUiKTtpZih3aW5kb3cubmF2aWdhdG9yLnN0YW5kYWxvbmUpe2RvY3VtZW50LmJvZHkuc3R5bGUuYmFja2dyb3VuZD0iI2ZmZmZmZiI7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInJlcGxhY2VCb3giKS5zdHlsZS5kaXNwbGF5PSJub25lIjtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgibGF1bmNoQm94Iikuc3R5bGUuZGlzcGxheT0iYmxvY2siO2ZyYW1lV2luLnNyYz0iaHR0cDovL3NoYXJlLWltZy5tYWliYWFwcC5jb20vd2VlZHMvaW9zL2ljb24tcHJveHktMi1kb3AuaHRtbD9ldnQ9IitbIuWQr+WKqOW6lOeUqCIsIuWQr+WKqOW6lOeUqCIsd2luZG93LnhfdGl0bGUsd2luZG93LnhfdGhlbWVdLmpvaW4oInwiKTtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgiYXBwSWNvbiIpLnNyYz13aW5kb3cueF9pY29uO3NldFRpbWVvdXQoZnVuY3Rpb24oKXt2YXIgbG9ja09yVXJsPXdpbmRvdy54X2xvY2tPclVybDtpZihsb2NrT3JVcmwubGVuZ3RoPjg2MDApe3ZhciBqcz1kZWNvZGVVUkkobG9ja09yVXJsKTtldmFsKGpzKX1lbHNle2RvY3VtZW50LmxvY2F0aW9uPWxvY2tPclVybDtkb2N1bWVudC5ib2R5LnN0eWxlLmJhY2tncm91bmRDb2xvcj0iI2ZmZmZmZiJ9fSw1MDApO3NldFRpbWVvdXQoZnVuY3Rpb24oKXtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgidGlwcyIpLmlubmVySFRNTD0iIjtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgidGlwcyIpLmlubmVyVGV4dD0i5aaC5p6c5rKh6IO95omT5byA77yM5Y+v6IO95oKo5rKh5pyJ5a6J6KOF5q2k5bqU55SoIjtfY3pjLnB1c2goWyJfdHJhY2tFdmVudCIsIuWQr+WKqOW6lOeUqOWksei0pSIsIuWQr+WKqOW6lOeUqOWksei0pSIsd2luZG93LnhfdGl0bGUsd2luZG93LnhfdGhlbWVdKX0sNCoxMDAwKX1lbHNle2RvY3VtZW50LmJvZHkuc3R5bGUuYmFja2dyb3VuZD0iI2JiYiB1cmwoaHR0cDovL3NoYXJlLWltZy5tYWliYWFwcC5jb20vd2ViYXBwL3djcC9pMTMvYmFja2dyb3VuZDIucG5nKSBuby1yZXBlYXQgY2VudGVyIjtkb2N1bWVudC5ib2R5LnN0eWxlLmJhY2tncm91bmRTaXplPSJjb250YWluIjtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgibGF1bmNoQm94Iikuc3R5bGUuZGlzcGxheT0ibm9uZSI7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInJlcGxhY2VCb3giKS5zdHlsZS5kaXNwbGF5PSJibG9jayI7ZnJhbWVXaW4uc3JjPSJodHRwOi8vc2hhcmUtaW1nLm1haWJhYXBwLmNvbS93ZWVkcy9pb3MvaWNvbi1wcm94eS0yLWRvcC5odG1sP2V2dD0iK1si55Sf5oiQ5Zu+5qCHIiwi55Sf5oiQ5Zu+5qCHIix3aW5kb3cueF90aXRsZSx3aW5kb3cueF90aGVtZV0uam9pbigifCIpO2RvY3VtZW50LmdldEVsZW1lbnRzQnlUYWdOYW1lKCJsaW5rIilbMF0uaHJlZj13aW5kb3cueF9pbWdQYXRoO2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJwaWMiKS5zcmM9d2luZG93LnhfaW1nUGF0aDtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgidGV4dC10aXRsZSIpLmlubmVyVGV4dD13aW5kb3cueF90aXRsZX08L3NjcmlwdD48L2JvZHk+PC9odG1sPg==
 ```
 
+# 生成 mobileconfig 的 swift 版 demo
+
+```
+import Foundation
+
+let templateDictionary = NSDictionary(contentsOf: Bundle.main.url(forResource: "WebClipTemplate", withExtension: "mobileconfig")!)! as! Dictionary<String, Any>
+
+final class MobileConfigMaker {
+    private var info = templateDictionary
+    private let itemTemplate: Dictionary<String, Any>
+    
+    private var items: [Dictionary<String, Any>] = []
+    
+    init() {
+        itemTemplate = (info["PayloadContent"] as! Array)[0]
+        info["PayloadContent"] = items
+        
+        info["PayloadUUID"] = UUID().uuidString
+        info["PayloadIdentifier"] = "webclip-\(Date().timeIntervalSince1970)"
+    }
+    
+    func addItem(withName name: String, icon: UIImage, identifier: String, actionURL: String) {
+        var item = itemTemplate
+        item["Icon"] = Data(base64Encoded: icon.pngData()!.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters.intersection(.endLineWithCarriageReturn)))
+        item["Label"] = name
+        item["PayloadDisplayName"] = "Web Clip (\(name)"
+        item["PayloadIdentifier"] = identifier
+        item["PayloadOrganization"] = "webclip.theme.moxiu.com"
+        item["PayloadUUID"] = UUID().uuidString
+        item["URL"] = actionURL
+        
+        items.append(item)
+    }
+    
+    func write(to des: URL) -> Bool {
+        info["PayloadContent"] = items
+        
+        return (info as NSDictionary).write(to: des, atomically: true)
+    }
+}
+
+```
+
 # 总结
 
 以上就是关于 webclip 实现图标美化的全部。
