@@ -4,8 +4,6 @@
 
 
 
-  
-
 
 
 
@@ -22,7 +20,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <meta name="renderer" content="webkit">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no", user-scalable=no">
-  <title>Tag: APNSHello Skill</title>
+  <title>基于 iOS 屏幕点亮特点的亮屏自动动效（开灯动效）的简单说明Hello Skill</title>
   <link rel="shortcut icon" href="">
   
     
@@ -110,47 +108,162 @@
                 </nav>
             </header>
                 
-<header class="blog-post-page-title blog-search-page-title">
-  <h4>标签<a href="">APNS</a>下的文章</h4>
+<header class="blog-post-page-title">
+    <h4>基于 iOS 屏幕点亮特点的亮屏自动动效（开灯动效）的简单说明</h4>
+    <time datetime="2020-11-02T12:23:52.000Z"><i class="fa fa-clock-o"></i>2020-11-02</time>
+    
+    
+    
+    
+	
+        <span><i class="fa fa-folder-o"></i>
+    		
+    	       <a href="/web/categories/iOS/" rel="categories" data-toggle="tooltip" data-placement="top" title="Linux">iOS</a>
+    		
+        </span>
+	
+    
 </header>
 <div class="blog-main-post blog-post-page-box">
-  
-    <article class="blog-post-block">
-        
-        <div class="blog-post-block-padding">
-          
-            <a href="/web/2020/07/08/iOS-%E8%84%9A%E6%89%8B%E6%9E%B6/">iOS 脚手架</a>
-          
-            <section>
-              
-                
-                生成推送需要的 PEM 证书12345678// app_pushnotification.cer 为 Apple 服务器后台下载的证书openssl x509 -in app_pushnotification.cer -inform der -out app
-                ...
-              
-            </section>
-            <footer>
-                <time datetime="2020-07-08T02:12:51.000Z><i class="fa fa-clock-o"></i>2020-07-08</time>
-                
-                
-                
-                
-                  <span><i class="fa fa-folder-o"></i>
-                    
-                      <a href="/web/categories/iOS/" itemprop="url" rel="index">
-                        iOS
-                      </a>
-                    
-                  </span>
-                
-            </footer>
-        </div>
-    </article>
-  
-    
-    <nav id="pagination" class="blog-pagination">
-            <span class="page-number current">1</span>
-    </nav>
+    <article class="blog-post-block blog-post-page-content">
+        <section>
+            
+                <p>真正意义上的锁屏动效有两种，一种是 LivePhoto，另一种是 iOS 壁纸原生自带的动态壁纸。</p>
+<p>LivePhoto 的不足在于，需要用户长按（没有 3d touch 时）或者按压屏幕才会播放，并且没有声音，用户体验不完美。</p>
+<p>原生自带动态壁纸的特点是可以亮屏自动播放，没有声音。最大的不足是，不支持第三方生成</p>
+<h1 id="新的方案"><a href="#新的方案" class="headerlink" title="新的方案"></a>新的方案</h1><p>在 iOS 11 更新之后，系统对点亮屏幕做了优化，会优先点亮屏幕比较暗的区域，这样就会形成一个点亮时序，基于这个特点就能使用静态图片模拟一种动态效果，俗称<em>开灯效果</em></p>
+<p>下面几张图片自带开灯效果（网图，侵删（<a href="mailto:463398425@qq.com">463398425@qq.com</a>））</p>
+<p><img src="1.JPEG" alt="1"><br><img src="2.JPEG" alt="1"><br><img src="3.JPEG" alt="1"></p>
+<p>这种方法的缺点就是，时长无法控制，很难开放给用户批量生成，效果一般</p>
 
+            
+        </section>
+        <footer class="blog-post-page-tags">
+        
+			
+				
+			<a href="/web/tags/%E9%94%81%E5%B1%8F%E5%BC%80%E7%81%AF%E5%8A%A8%E6%95%88/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">锁屏开灯动效</a>
+				
+			<a href="/web/tags/iOS-%E7%BE%8E%E5%8C%96/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">iOS 美化</a>
+				
+			
+		
+        </footer>
+    </article>
+    <article class="blog-post-page-readmore">
+    	
+    	
+		
+
+		
+		
+			<a href="/web/2020/11/02/%E5%9F%BA%E4%BA%8E-WebClip-%E6%8A%80%E6%9C%AF%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BA%94%E7%94%A8%E5%9B%BE%E6%A0%87/" class="blog-post-page-readmore-next" data-toggle="tooltip" data-placement="top" title="基于 WebClip 技术的自定义应用图标">下一篇</a>
+		
+
+        <div style="clear: both;"></div>
+    </article>
+
+    <article class="blog-post-block blog-post-page-content">
+            <div class="row">
+            
+                <div class="col-md-4 col-sm-4 post-page-more-btn">
+                    <span  data-toggle="modal" data-target="#post-donate-content">
+                        <span id="post-donate-btn" class="btn btn-danger btn-block" data-toggle="tooltip" data-placement="top" title="如果您觉得本文还不错或者对您有帮助，可以考虑打赏一下作者哦">打赏本文</span>
+                    </span>
+                </div>
+                <div class="col-md-4 col-sm-4 post-page-more-btn">
+                    <span  data-toggle="modal" data-target="#post-qrcode-content">
+                        <span><span id="post-qrcode-btn" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="微信扫描二维码手机端查看本文及分享本文">二维码</span></span>
+                    </span>
+                </div>
+            </div>
+        <div class="post-more-function-br"></div>
+
+        <div class="modal fade" id="post-donate-content" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">打赏本文</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row post-donate-content">
+                            <div class="col-md-4">
+                                <p>支付宝</p>
+                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/alipay.jpg"/>
+                            </div>
+                            <div class="col-md-4">
+                                <p>微信</p>
+                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/wechat.png"/>
+                            </div>
+                            <div class="col-md-4">
+                                <p>财付通</p>
+                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/qqpay.png"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="post-qrcode-content" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">文章二维码</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row post-qrcode-content">
+                            <span class="post-qrcode-content-canvas"></span>
+                            <img class="post-qrcode-content-img no-lightbox" src=""/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // post QRcode
+            // 中文转码
+            function toUtf8(str) {
+                var out, i, len, c;
+                out = "";
+                len = str.length;
+                for (i = 0; i < len; i++) {
+                    c = str.charCodeAt(i);
+                    if ((c >= 0x0001) && (c <= 0x007F)) {
+                        out += str.charAt(i);
+                    } else if (c > 0x07FF) {
+                        out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                        out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
+                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                    } else {
+                        out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
+                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                    }
+                }
+                return out;
+            }
+            // 生成
+            var qrcode= $('.post-qrcode-content-canvas').qrcode({width: 150,height: 150,text: toUtf8("https://joriwang.github.io/web/2020/11/02/%E5%9F%BA%E4%BA%8E-iOS-%E5%B1%8F%E5%B9%95%E7%82%B9%E4%BA%AE%E7%89%B9%E7%82%B9%E7%9A%84%E4%BA%AE%E5%B1%8F%E8%87%AA%E5%8A%A8%E5%8A%A8%E6%95%88%EF%BC%88%E5%BC%80%E7%81%AF%E5%8A%A8%E6%95%88%EF%BC%89%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E/")}).hide();
+            var canvas=qrcode.find('canvas').get(0);
+            $('.post-qrcode-content-img').attr('src',canvas.toDataURL('image/jpg'));
+        </script>
+
+        
+    </article>
+    
 </div>
 
                 
