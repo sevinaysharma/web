@@ -1,0 +1,508 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no", user-scalable=no">
+  <title>基于 WebClip 技术的自定义应用图标Hello Skill</title>
+  <link rel="shortcut icon" href="">
+  
+    
+    
+      <link rel="stylesheet" href="/web/css/bootstrap.min.css">
+    
+      <link rel="stylesheet" href="/web/css/font-awesome.min.css">
+    
+      <link rel="stylesheet" href="/web/css/atom-one-dark.css">
+    
+      <link rel="stylesheet" href="/web/css/jquery.fancybox.css">
+    
+      <link rel="stylesheet" href="/web/css/nprogress.min.css">
+    
+      <link rel="stylesheet" href="/web/css/valine.css">
+    
+      <link rel="stylesheet" href="/web/css/life.css">
+    
+  
+
+  
+
+  <!-- jQuery first, then Tether, then Bootstrap JS. -->
+  
+  
+  
+    <script src="/web/js/jquery-2.2.4.min.js"></script>
+  
+    <script src="https://cdn1.lncld.net/static/js/3.1.0/av-min.js"></script>
+  
+    <script src="/web/js/jquery.pjax.js"></script>
+  
+    <script src="/web/js/nprogress.min.js"></script>
+  
+    <script src="/web/js/tether.min.js"></script>
+  
+    <script src="/web/js/bootstrap.min.js"></script>
+  
+    <script src="/web/js/highlight.min.js"></script>
+  
+    <script src="/web/js/highlightjs-line-numbers.min.js"></script>
+  
+    <script src="/web/js/jquery.fancybox.js"></script>
+  
+    <script src="/web/js/jquery.qrcode.min.js"></script>
+  
+    <script src="/web/js/Valine.min.js"></script>
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+<script>AV.init({appId:'',appKey:''});</script>
+<script type="text/javascript">
+      var config = {
+            ClasS: 'Counter',
+            el:'.views',
+            elP: '.views-post'
+      }
+</script>
+<div class="container">
+    <div class="row blog-box-shadow">
+        <!--博客主栏开始-->
+        <div class="col-xl-9 col-lg-12 blog-main" id="pjax-box">
+            <header class="blog-header">
+                <a href="https://joriwang.github.io/web" class="blog-header-mobile-title">Hello Skill</a>
+                <a href="javascript:;" class="blog-header-navbar-btn"><i class="fa fa-bars"></i></a>
+                <nav class="blog-header-navbar blog-header-fixed">
+                    <ul class="blog-navbar-links">
+                        
+                          <li class="blog-nav-item"><a href="/web" class="transition">首页</a></li>
+                        
+                          <li class="blog-nav-item"><a href="/about/" class="transition">关于</a></li>
+                        
+                          <li class="blog-nav-item"><a href="/links/" class="transition">链接</a></li>
+                        
+                        <div class="blog-navbar-right">
+                            <form action="">
+                                <div class="input-group">
+                                    <input type="text" class="blog-header-search" placeholder="search...">
+                                    <buttn type="submit" class="blog-header-search-btn"><i class="fa fa-search"></i></buttn>
+                                </div>
+                            </form>
+                        </div>
+                    </ul>
+                </nav>
+            </header>
+                
+<header class="blog-post-page-title">
+    <h4>基于 WebClip 技术的自定义应用图标</h4>
+    <time datetime="2020-11-02T11:04:28.000Z"><i class="fa fa-clock-o"></i>2020-11-02</time>
+    
+    
+    
+    
+	
+        <span><i class="fa fa-folder-o"></i>
+    		
+    	       <a href="/web/categories/iOS/" rel="categories" data-toggle="tooltip" data-placement="top" title="Linux">iOS</a>
+    		
+        </span>
+	
+    
+</header>
+<div class="blog-main-post blog-post-page-box">
+    <article class="blog-post-block blog-post-page-content">
+        <section>
+            
+                <p>最近在做 iOS 美化相关的工作。主要集中在 APP 图标美化、类主题的美化（壁纸+app美化）、锁屏动态效果（主屏不支持）。</p>
+<p>这是美化相关文章的第一篇，记录了 WebClip 如何实现 APP 图标美化及其涉及的相关技术</p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>WebClip 本质是桌面 web 书签，通过 Safari 来打开相关的应用。因此既可以通过 deep link 方式启动三方应用，又可以通过 scheme 来启动三方应用。为了实现批量设置应用图标简化用户的使用流程，我们使用 <code>mobileconfig</code> 描述文件打包相关设置。</p>
+<p><code>mobileconfig</code> 是 Apple MDM 的一部分。是一种 plist 文件。因此生成或修改这种文件有两种方式：Apple Configurator 2 或者直接修改 plist 文件。</p>
+<p>下面是一个 mobileconfig 文件的内容 demo</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">plist</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//Apple//DTD PLIST 1.0//EN"</span> <span class="meta-string">"http://www.apple.com/DTDs/PropertyList-1.0.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadContent<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">key</span>&gt;</span>FullScreen<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">key</span>&gt;</span>Icon<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">data</span>&gt;</span>icon base64 data<span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">key</span>&gt;</span>IsRemovable<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">key</span>&gt;</span>Label<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">string</span>&gt;</span>ScreenDisplayName<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadDescription<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">string</span>&gt;</span>add web clip<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadDisplayName<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">string</span>&gt;</span>Web Clip (信息)<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadIdentifier<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">string</span>&gt;</span>identifier value<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadOrganization<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">string</span>&gt;</span>organization name<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadType<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">string</span>&gt;</span>com.apple.webClip.managed<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadUUID<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">string</span>&gt;</span>uuid<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadVersion<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">integer</span>&gt;</span>1<span class="tag">&lt;/<span class="name">integer</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">key</span>&gt;</span>Precomposed<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">key</span>&gt;</span>URL<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">string</span>&gt;</span>mqq://aa.bb<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadDescription<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>description for mobileconfig<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadDisplayName<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>displayname for mobileconfig<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadIdentifier<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>identifier value<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadOrganization<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>organization value<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadRemovalDisallowed<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadType<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>Configuration<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadUUID<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>uuid<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>PayloadVersion<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">integer</span>&gt;</span>1<span class="tag">&lt;/<span class="name">integer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中最重要的是 <code>PayloadUUID</code>、<code>PayloadIdentifier</code>、<code>URL</code>、<code>Icon</code>、<code>Label</code>。相同 <code>PayloadUUID</code> 的 mobileconfig 不会重复安装。<code>URL</code> 用于指定用户点击之后要跳转的页面。<code>Icon</code> 用于指定在桌面上的显示图标。<code>Label</code> 用于指定在桌面上显示的名字。</p>
+<p>通过下载和安装 mobileconfig，就可以将其中包含的 webclip 添加到桌面上。</p>
+<h1 id="mobileconfig-的下载探索"><a href="#mobileconfig-的下载探索" class="headerlink" title="mobileconfig 的下载探索"></a>mobileconfig 的下载探索</h1><p>为了实现用户方便下载描述文件，我们尝试了如下方式，并一一失败</p>
+<p><strong>data 协议</strong></p>
+<p>通过把下载页面编码成 <code>data:text/html;base64,base64data==</code> 的形式，通过 <code>UIApplication</code> 的 <code>open</code> api 来跳转 Safari 实现无服务器依赖的下载流程。</p>
+<p>失败原因：该 api 不支持 data 协议，仅支持 http、https、facetime、tel、mailto 等少数协议</p>
+<p>下面是一个 html 样例。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CiAgPG1ldGEgY2hhcnNldD0iVVRGLTgiPgogIDxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wIj4KICA8dGl0bGU+aWNvbjwvdGl0bGU+CjwvaGVhZD4KPHNjcmlwdD4KICB2YXIgd2lkdGggPSB3aW5kb3cuc2NyZWVuLndpZHRoOwogIHdpZHRoID0gTWF0aC5taW4od2lkdGgsIDc1MCk7CiAgZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LnN0eWxlLmZvbnRTaXplID0gd2lkdGggLyAzLjc1ICsgJ3B4JzsKPC9zY3JpcHQ+CjxzdHlsZT4KICBib2R5IHsKICAgIGJhY2tncm91bmQtY29sb3I6ICM3RDhFQTE7CiAgICB3aWR0aDogMTAwJTsKICAgIGhlaWdodDogMTAwJTsKICAgIG1hcmdpbjogMDsKICAgIHBhZGRpbmc6IDA7CiAgfQogIC50aXBzIGltZyB7CiAgICB3aWR0aDogMC44NHJlbTsKICAgIGhlaWdodDogMC43OXJlbTsKICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICAgIHRvcDogY2FsYyg1MCUgKyA1NXB4KTsKICAgIG1hcmdpbi1sZWZ0OiAyLjYwcmVtOwogIH0KICAudGlwcyBwIHsKICAgIGNvbG9yOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuOSk7CiAgICBmb250LXNpemU6IDAuMThyZW07CiAgICBmb250LXdlaWdodDogNTAwOwogICAgdGV4dC1zaGFkb3c6IDBweCAwcHggMHB4IHJnYmEoNjUsIDczLCA4MywgMC41Nik7CiAgICB3aWR0aDogMTAwJTsKICAgIHRleHQtYWxpZ246IGNlbnRlcjsKICAgIG1hcmdpbjogMDsKICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICAgIHRvcDogY2FsYyg1MCUgKyA2MHB4ICsgMC43OXJlbSk7CiAgfQogIC50aXBzIHNwYW4gewogICAgY29sb3I6IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC41KTsKICAgIGZvbnQtc2l6ZTogMC4xM3JlbTsKICAgIHdpZHRoOiAxMDAlOwogICAgZGlzcGxheTogYmxvY2s7CiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7CiAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICB0b3A6IGNhbGMoNTAlICsgNzBweCArIDFyZW0pOwogIH0KICAubmV4dCB7CiAgICB3aWR0aDogMS43NnJlbTsKICAgIGhlaWdodDogMC43MnJlbTsKICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICAgIHRvcDogODQlOwogICAgbGVmdDogNTAlOwogICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKC01MCUpOwogIH0KICAubmV4dCBpbWcgewogICAgd2lkdGg6IDEwMCU7CiAgICBoZWlnaHQ6IDEwMCU7CiAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICBsZWZ0OiA1MCU7CiAgICB0b3A6IDUwJTsKICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpOwogIH0KPC9zdHlsZT4KPGJvZHk+CiAgPGRpdiBjbGFzcz0idGlwcyI+CiAgICA8aW1nIHNyYz0iaHR0cDovL2NhY2hlLm5leHQubW94aXUuY29tL2NvbW1vbi9iY2Q5ZDQ5MWMwM2I5MGVkNzBmNjlmM2Q3NTQwYjA2NGRjZjBlNzY3Ij4KICAgIDxwPuato+WcqOeUn+aIkOWbvuagh++<span class="number">8</span>jOivt+eCueWHu+WFgeiuuDwvcD4KICAgIDxzcGFuIG9uY2xpY2s9IndpbmRvdy5sb2NhdGlvbi5yZWxvYWQoKSI+<span class="number">5</span>aaC5p6c5LiN5bCP5b+D54K55LqG5b+<span class="number">955</span>Wl5oyJ6ZKuLCDor7fngrnlh7vliLfmlrDpobXpnaLph43or5Xlk6Z+PC9zcGFuPgogIDwvZGl2PgogIDxhIGhyZWY9Imh0dHBzOi8vZWxmLnN0YXRpYy5tYWliYWFwcC5jb20vYXNzZXRzL2h0bWwveHlqLXBydWUvcGljZ3VpZGUuaHRtbCIgY2xhc3M9Im5leHQiPgogICAgPGltZyBzcmM9Imh0dHA6Ly9jYWNoZS5uZXh0Lm1veGl1LmNvbS9jb21tb24vZjUwYWVlOGMyNTY4MWNiZDhlMjFiODg5MmE2ZTFjZDFlNmQ3OTk1MCI+CiAgPC9hPgo8L2JvZHk+CjxzY3JpcHQ+CiAgdmFyIGMgPSAnRklMRUNPTlRFTlQnCiAgdmFyIGEgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJykKICBhLmRvd25sb2FkID0gJ0ZJTEVOQU1FLm1vYmlsZWNvbmZpZycKICB2YXIgYiA9IG5ldyBCbG9iKFtjXSkKICBhLmhyZWYgPSBVUkwuY3JlYXRlT2JqZWN0VVJMKGIpCgogIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSkKICBhLmNsaWNrKCkKICBkb2N1bWVudC5ib2R5LnJlbW92ZUNoaWxkKGEpCjwvc2NyaXB0Pgo8L2h0bWw+Cg==</span><br></pre></td></tr></table></figure>
+
+<p><strong>内置 web 服务器</strong></p>
+<p>使用 <code>GCDWebServer</code> 在应用内架设 Web 服务，通过 <code>http://127.0.0.1:9000</code> 来实现 mobileconfig 的下载和使用引导。</p>
+<p>失败原因：应用进入后台后，相关端口无法接收数据</p>
+<h1 id="mobileconfig-的签名处理"><a href="#mobileconfig-的签名处理" class="headerlink" title="mobileconfig 的签名处理"></a>mobileconfig 的签名处理</h1><p>mobileconfig 文件不签名也可以使用，但是系统会给用户不安全提示，并且比签名版多一个确认步骤。</p>
+<p>在使用 Apple Configurator 2 生成描述文件时，可以选择本机的开发者证书签名该文件。也可以通过 openssl 用 ssl 证书签名该文件。</p>
+<p>使用 openssl 签名的命令如下</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">openssl</span> <span class="selector-tag">smime</span> <span class="selector-tag">-sign</span> <span class="selector-tag">-in</span> <span class="selector-tag">webclip</span><span class="selector-class">.mobileconfig</span> <span class="selector-tag">-out</span> <span class="selector-tag">webclip_signed</span><span class="selector-class">.mobileconfig</span> <span class="selector-tag">-signer</span> <span class="selector-tag">signer</span><span class="selector-class">.pem</span> <span class="selector-tag">-inkey</span> <span class="selector-tag">my</span><span class="selector-class">.pem</span> <span class="selector-tag">-certfile</span> <span class="selector-tag">ca</span><span class="selector-class">.pem</span> <span class="selector-tag">-outform</span> <span class="selector-tag">der</span> <span class="selector-tag">-nodetach</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>signer.pem 对应的是域名使用的证书（公钥证书）</li>
+<li>my.pem 对应的是域名证书的私钥</li>
+<li>ca.pem 对应的是证书链</li>
+</ul>
+<h2 id="关于证书链"><a href="#关于证书链" class="headerlink" title="关于证书链"></a>关于证书链</h2><p>如果你用的是 <code>Let&#39;s encrypt</code> ，证书链可以在 web 工具的配置文件中找到。如果你用的是商业 CA，请联系对方。</p>
+<p>如果你想使用开发者证书来通过命令行签名，可以通过 <a href="https://www.apple.com/certificateauthority/" target="_blank" rel="noopener">https://www.apple.com/certificateauthority/</a> 下载相应的证书组成证书链</p>
+<h1 id="关于跳转页面"><a href="#关于跳转页面" class="headerlink" title="关于跳转页面"></a>关于跳转页面</h1><p>点击桌面上的 webclip 后，safari 会跳转到相应的链接。如果使用 scheme 方式跳转应用，点击后会先显示一个全屏的白色页面，然后打开对应的应用。为了美化这个白色页面可以使用 <code>data:</code> 协议制作一个中间页，在这个页面里通过 js 打开对应 app，这样，跳转流程会更美观。</p>
+<p>下面是 <em>dop 主题图标</em> 这款应用使用到的中间页（侵删。<a href="mailto:463398425@qq.com">463398425@qq.com</a>）</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data:text/html;base64,PGh0bWwgbGFuZz0iemgiPjxoZWFkPjxtZXRhIGNoYXJzZXQ9IlVURi04Ij48bWV0YSBodHRwLWVxdWl2PSJjYWNoZS1jb250cm9sImNvbnRlbnQ9Im5vLWNhY2hlIi8+PG1ldGEgY29udGVudD0ieWVzIm5hbWU9ImFwcGxlLXRvdWNoLWZ1bGxzY3JlZW4iPjxtZXRhIGNvbnRlbnQ9InllcyJuYW1lPSJhcHBsZS1tb2JpbGUtd2ViLWFwcC1jYXBhYmxlIj48bWV0YSBjb250ZW50PSJ3aGl0ZSJuYW1lPSJhcHBsZS1tb2JpbGUtd2ViLWFwcC1zdGF0dXMtYmFyLXN0eWxlIj48bWV0YSBuYW1lPSJhcHBsZS1tb2JpbGUtd2ViLWFwcC1jYXBhYmxlImNvbnRlbnQ9InllcyI+PG1ldGEgbmFtZT0idmlld3BvcnQiY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCwgbWF4aW11bS1zY2FsZT0xLjAsIHVzZXItc2NhbGFibGU9bm8iPjx0aXRsZT7pl7Lpsbw8L3RpdGxlPjxsaW5rIHJlbD0iYXBwbGUtdG91Y2gtaWNvbi1wcmVjb21wb3NlZCIvPjxzY3JpcHQ+d2luZG93LnhfdGl0bGU9IumXsumxvCI7aWYod2luZG93LnhfdGl0bGU9PT0iICIpe2RvY3VtZW50LmdldEVsZW1lbnRzQnlUYWdOYW1lKCJ0aXRsZSIpWzBdLmlubmVyVGV4dD0iIn13aW5kb3cueF9pbWdQYXRoPSIiO3dpbmRvdy54X2xvY2tPclVybD0iZmxlYW1hcmtldDovLyI7d2luZG93LnhfcGFzcz0iSkdMYXVuY2hQYXNzIjt3aW5kb3cueF9pY29uPSJodHRwOi8vc2hhcmUtaW1nLm1haWJhYXBwLmNvbS9pb3Mvd2ViY2xpcC9hcHAvaWNvbi85ZDQ4NjViYTFlNWRkNjJjYTU0ZTE0MzM3MWVkM2RjYy0xMjIuanBnIjt3aW5kb3cueF90aGVtZT0i5Y2h6YCa6L+q5aOr5bC8Ijt2YXIgX2N6Yz1fY3pjfHxbXTs8L3NjcmlwdD48bGluayByZWw9InN0eWxlc2hlZXQiaHJlZj0iaHR0cDovL3NoYXJlLWltZy5tYWliYWFwcC5jb20vd2ViYXBwL3djcC9pMTMvaW5kZXguY3NzIi8+PC9oZWFkPjxib2R5PjxkaXYgaWQ9InJlcGxhY2VCb3giPjxkaXYgYWxpZ249ImNlbnRlciJpZD0iaWNvbnMiPjxkaXYgY2xhc3M9Imljb24iPjxpbWcgc3JjPSIiaWQ9InBpYyI+PGRpdiBpZD0idGV4dC10aXRsZSJjbGFzcz0idGV4dCI+SkdBUFBOYW1lPC9kaXY+PC9kaXY+PC9kaXY+PGRpdiBpZD0iYm90dG9tIj48L2Rpdj48L2Rpdj48ZGl2IGlkPSJsYXVuY2hCb3gic3R5bGU9ImRpc3BsYXk6IG5vbmU7Ij48ZGl2PjxkaXYgY2xhc3M9ImFwcC1pY29uIj48aW1nIGlkPSJhcHBJY29uInNyYz0iSkdMYXVuY2hBUFBJY29uIj48L2Rpdj48ZGl2IGNsYXNzPSJhcHAtbmFtZSJpZD0idGlwcyI+PGRpdj5sb2FkaW5nPHNwYW4gaWQ9ImFwcE5hbWUiPkpHTGF1bmNoQVBQTmFtZTwvc3Bhbj48L2Rpdj48L2Rpdj48ZGl2IGNsYXNzPSJsYXVuY2hpbmctbW92aWUiPjxpbWcgd2lkdGg9IjEwMCJzcmM9Imh0dHA6Ly9zaGFyZS1pbWcubWFpYmFhcHAuY29tL3dlYmFwcC93Y3AvaTEzL2xvYWRpbmcuZ2lmIj48L2Rpdj48L2Rpdj48L2Rpdj48aWZyYW1lIHN0eWxlPSJkaXNwbGF5OiBub25lOyJpZD0idHJhY2tFdmVudElmcmFtZSI+PC9pZnJhbWU+PHNjcmlwdD52YXIgZnJhbWVXaW49ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInRyYWNrRXZlbnRJZnJhbWUiKTtpZih3aW5kb3cubmF2aWdhdG9yLnN0YW5kYWxvbmUpe2RvY3VtZW50LmJvZHkuc3R5bGUuYmFja2dyb3VuZD0iI2ZmZmZmZiI7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInJlcGxhY2VCb3giKS5zdHlsZS5kaXNwbGF5PSJub25lIjtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgibGF1bmNoQm94Iikuc3R5bGUuZGlzcGxheT0iYmxvY2siO2ZyYW1lV2luLnNyYz0iaHR0cDovL3NoYXJlLWltZy5tYWliYWFwcC5jb20vd2VlZHMvaW9zL2ljb24tcHJveHktMi1kb3AuaHRtbD9ldnQ9IitbIuWQr+<span class="built_in">WKqOW6lOeUqCIsIuWQr</span>+<span class="built_in">WKqOW6lOeUqCIsd2luZG93LnhfdGl0bGUsd2luZG93LnhfdGhlbWVdLmpvaW4oInwiKTtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgiYXBwSWNvbiIpLnNyYz13aW5kb3cueF9pY29uO3NldFRpbWVvdXQoZnVuY3Rpb24oKXt2YXIgbG9ja09yVXJsPXdpbmRvdy54X2xvY2tPclVybDtpZihsb2NrT3JVcmwubGVuZ3RoPjg2MDApe3ZhciBqcz1kZWNvZGVVUkkobG9ja09yVXJsKTtldmFsKGpzKX1lbHNle2RvY3VtZW50LmxvY2F0aW9uPWxvY2tPclVybDtkb2N1bWVudC5ib2R5LnN0eWxlLmJhY2tncm91bmRDb2xvcj0iI2ZmZmZmZiJ9fSw1MDApO3NldFRpbWVvdXQoZnVuY3Rpb24oKXtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgidGlwcyIpLmlubmVySFRNTD0iIjtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgidGlwcyIpLmlubmVyVGV4dD0i5aaC5p6c5rKh6IO95omT5byA77yM5Y</span>+v6IO95oKo5rKh5pyJ5a6J6KOF5q2k5bqU55SoIjtfY3pjLnB1c2goWyJfdHJhY2tFdmVudCIsIuWQr+<span class="built_in">WKqOW6lOeUqOWksei0pSIsIuWQr</span>+<span class="built_in">WKqOW6lOeUqOWksei0pSIsd2luZG93LnhfdGl0bGUsd2luZG93LnhfdGhlbWVdKX0sNCoxMDAwKX1lbHNle2RvY3VtZW50LmJvZHkuc3R5bGUuYmFja2dyb3VuZD0iI2JiYiB1cmwoaHR0cDovL3NoYXJlLWltZy5tYWliYWFwcC5jb20vd2ViYXBwL3djcC9pMTMvYmFja2dyb3VuZDIucG5nKSBuby1yZXBlYXQgY2VudGVyIjtkb2N1bWVudC5ib2R5LnN0eWxlLmJhY2tncm91bmRTaXplPSJjb250YWluIjtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgibGF1bmNoQm94Iikuc3R5bGUuZGlzcGxheT0ibm9uZSI7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInJlcGxhY2VCb3giKS5zdHlsZS5kaXNwbGF5PSJibG9jayI7ZnJhbWVXaW4uc3JjPSJodHRwOi8vc2hhcmUtaW1nLm1haWJhYXBwLmNvbS93ZWVkcy9pb3MvaWNvbi1wcm94eS0yLWRvcC5odG1sP2V2dD0iK1si55Sf5oiQ5Zu</span>+<span class="number">5</span>qCHIiwi55Sf5oiQ5Zu+<span class="number">5</span>qCHIix3aW5kb3cueF90aXRsZSx3aW5kb3cueF90aGVtZV0uam9pbigifCIpO2RvY3VtZW50LmdldEVsZW1lbnRzQnlUYWdOYW1lKCJsaW5rIilbMF0uaHJlZj13aW5kb3cueF9pbWdQYXRoO2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJwaWMiKS5zcmM9d2luZG93LnhfaW1nUGF0aDtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgidGV4dC10aXRsZSIpLmlubmVyVGV4dD13aW5kb3cueF90aXRsZX08L3NjcmlwdD48L2JvZHk+PC9odG1sPg==</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上就是关于 webclip 实现图标美化的全部。</p>
+<p>使用这种方式会一次性应用多个图标，并且自动添加到桌面。缺点就是用户需要知道怎么使用描述文件，这是一个很大的门槛。不过没有办法，iOS 上目前还没有一步到位的设置方法。</p>
+
+            
+        </section>
+        <footer class="blog-post-page-tags">
+        
+			
+				
+			<a href="/web/tags/WebClip/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">WebClip</a>
+				
+			<a href="/web/tags/Data-%E5%8D%8F%E8%AE%AE/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">Data 协议</a>
+				
+			<a href="/web/tags/base64/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">base64</a>
+				
+			
+		
+        </footer>
+    </article>
+    <article class="blog-post-page-readmore">
+    	
+    	
+		
+
+		
+		
+			<a href="/web/2020/10/12/SQLite-%E9%9A%8F%E7%AC%94/" class="blog-post-page-readmore-next" data-toggle="tooltip" data-placement="top" title="SQLite 随笔">下一篇</a>
+		
+
+        <div style="clear: both;"></div>
+    </article>
+
+    <article class="blog-post-block blog-post-page-content">
+            <div class="row">
+            
+                <div class="col-md-4 col-sm-4 post-page-more-btn">
+                    <span  data-toggle="modal" data-target="#post-donate-content">
+                        <span id="post-donate-btn" class="btn btn-danger btn-block" data-toggle="tooltip" data-placement="top" title="如果您觉得本文还不错或者对您有帮助，可以考虑打赏一下作者哦">打赏本文</span>
+                    </span>
+                </div>
+                <div class="col-md-4 col-sm-4 post-page-more-btn">
+                    <span  data-toggle="modal" data-target="#post-qrcode-content">
+                        <span><span id="post-qrcode-btn" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="微信扫描二维码手机端查看本文及分享本文">二维码</span></span>
+                    </span>
+                </div>
+            </div>
+        <div class="post-more-function-br"></div>
+
+        <div class="modal fade" id="post-donate-content" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">打赏本文</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row post-donate-content">
+                            <div class="col-md-4">
+                                <p>支付宝</p>
+                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/alipay.jpg"/>
+                            </div>
+                            <div class="col-md-4">
+                                <p>微信</p>
+                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/wechat.png"/>
+                            </div>
+                            <div class="col-md-4">
+                                <p>财付通</p>
+                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/qqpay.png"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="post-qrcode-content" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">文章二维码</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row post-qrcode-content">
+                            <span class="post-qrcode-content-canvas"></span>
+                            <img class="post-qrcode-content-img no-lightbox" src=""/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // post QRcode
+            // 中文转码
+            function toUtf8(str) {
+                var out, i, len, c;
+                out = "";
+                len = str.length;
+                for (i = 0; i < len; i++) {
+                    c = str.charCodeAt(i);
+                    if ((c >= 0x0001) && (c <= 0x007F)) {
+                        out += str.charAt(i);
+                    } else if (c > 0x07FF) {
+                        out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                        out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
+                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                    } else {
+                        out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
+                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                    }
+                }
+                return out;
+            }
+            // 生成
+            var qrcode= $('.post-qrcode-content-canvas').qrcode({width: 150,height: 150,text: toUtf8("https://joriwang.github.io/web/2020/11/02/%E5%9F%BA%E4%BA%8E-WebClip-%E6%8A%80%E6%9C%AF%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BA%94%E7%94%A8%E5%9B%BE%E6%A0%87/")}).hide();
+            var canvas=qrcode.find('canvas').get(0);
+            $('.post-qrcode-content-img').attr('src',canvas.toDataURL('image/jpg'));
+        </script>
+
+        
+    </article>
+    
+</div>
+
+                
+            <footer class="blog-footer">
+                <p class="blog-footer-left">Copyright ©  2020 <a href="https://joriwang.github.io/web">Hello Skill</a></p>
+                <p class="blog-footer-right">Powered by <a href="https://hexo.io" target="_blank">Hexo</a>,Theme <a href="https://note.isweic.com/themes-life/" target="_blank">Life</a></p>
+            </footer>
+        </div><!--博客主栏结束-->
+        <!--博客侧边栏开始-->
+        <div class="col-xl-3 blog-sidebar">
+            <div class="blog-sidebar-title">
+                <a href="">Hello Skill</a>
+            </div>
+            <div class="blog-sidebar-logo">
+                <img src="http://dl.weic96.cn/logo.png">
+            </div>
+            <div class="blog-sidebar-count blog-sidebar-padding">
+                <div class="blog-sidebar-count-left">
+                    <p class="blog-sidebar-count-p">25</p>
+                    <span class="blog-sidebar-count-span">文章</span>
+                </div>
+                <div class="blog-sidebar-count-right">
+                    <p class="blog-sidebar-count-p">27</p>
+                    <span class="blog-sidebar-count-span">标签</span>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="blog-sidebar-icon blog-sidebar-padding">
+                <ul>
+                    <li><a href="https://github.com/joriwang/" class="icon-github" target="_blank" data-toggle="tooltip" data-placement="top" title="Github"><i class="fa fa-github"></i></a></li>
+                    <li><a href="" class="icon-weibo" target="_blank" data-toggle="tooltip" data-placement="top" title="新浪微博"><i class="fa fa-weibo"></i></a></li>
+                    <li><a href="" class="icon-twitter" target="_blank" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                    <!--<li><a href="" class="icon-facebook" target="_blank" data-toggle="tooltip" data-placement="top" title="FaceBook"><i class="fa fa-facebook"></i></a></li>-->
+                    <li><a href="mailto:463398425@qq.com" class="icon-email" data-toggle="tooltip" data-placement="top" title="E-Mail"><i class="fa fa-envelope"></i></a></li>
+                    <li><a href="" class="icon-rss" data-toggle="tooltip" target="_blank" data-placement="top" title="RSS"><i class="fa fa-rss"></i></a></li>
+                </ul>
+            </div>
+            <div class="blog-sidebar-categories">
+                <h4 class="blog-sidebar-h4"><i class="fa fa-folder-open"></i>&nbsp;文章分类</h4>
+                <ul class="list-group blog-sidebar-padding">
+                  
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/Android/">Android</a>
+                          <span class="badge badge-default badge-pill">3</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/iOS/">iOS</a>
+                          <span class="badge badge-default badge-pill">12</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/git/">git</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/GitHub/">GitHub</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/SQLite/">SQLite</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/xcode/">xcode</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/itms/">itms</a>
+                          <span class="badge badge-default badge-pill">2</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E5%B9%B3%E5%8F%B0%E5%B7%A5%E5%85%B7/">平台工具</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/iOS/Android/">Android</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/iOS/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                  
+                </ul>
+            </div>
+            <div class="blog-sidebar-tags">
+                <h4 class="blog-sidebar-h4"><i class="fa fa-tag"></i>&nbsp;标签云</h4>
+                <ul class="blog-sidebar-tags-ul blog-sidebar-padding">
+                  
+                    
+                      <li><a href="/web/tags/Android-%E5%83%8F%E7%B4%A0%E5%AF%86%E5%BA%A6/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Android 像素密度">Android 像素密度</a></li>
+                    
+                      <li><a href="/web/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="tag-could" data-toggle="tooltip" data-placement="top" title="生命周期">生命周期</a></li>
+                    
+                      <li><a href="/web/tags/Android/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Android">Android</a></li>
+                    
+                      <li><a href="/web/tags/APK/" class="tag-could" data-toggle="tooltip" data-placement="top" title="APK">APK</a></li>
+                    
+                      <li><a href="/web/tags/cocoapods/" class="tag-could" data-toggle="tooltip" data-placement="top" title="cocoapods">cocoapods</a></li>
+                    
+                      <li><a href="/web/tags/C-OC-%E8%BE%93%E5%87%BA%E5%8D%A0%E4%BD%8D%E7%AC%A6/" class="tag-could" data-toggle="tooltip" data-placement="top" title="C/OC 输出占位符">C/OC 输出占位符</a></li>
+                    
+                      <li><a href="/web/tags/SQLite/" class="tag-could" data-toggle="tooltip" data-placement="top" title="SQLite">SQLite</a></li>
+                    
+                      <li><a href="/web/tags/xcode/" class="tag-could" data-toggle="tooltip" data-placement="top" title="xcode">xcode</a></li>
+                    
+                      <li><a href="/web/tags/iMessage/" class="tag-could" data-toggle="tooltip" data-placement="top" title="iMessage">iMessage</a></li>
+                    
+                      <li><a href="/web/tags/APNS/" class="tag-could" data-toggle="tooltip" data-placement="top" title="APNS">APNS</a></li>
+                    
+                      <li><a href="/web/tags/itms/" class="tag-could" data-toggle="tooltip" data-placement="top" title="itms">itms</a></li>
+                    
+                      <li><a href="/web/tags/OC/" class="tag-could" data-toggle="tooltip" data-placement="top" title="OC">OC</a></li>
+                    
+                      <li><a href="/web/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="tag-could" data-toggle="tooltip" data-placement="top" title="开发工具">开发工具</a></li>
+                    
+                      <li><a href="/web/tags/APP%E5%BC%80%E5%8F%91%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B/" class="tag-could" data-toggle="tooltip" data-placement="top" title="APP开发大致流程">APP开发大致流程</a></li>
+                    
+                      <li><a href="/web/tags/UI-%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80%E6%8A%80%E8%83%BD/" class="tag-could" data-toggle="tooltip" data-placement="top" title="UI 必备基础技能">UI 必备基础技能</a></li>
+                    
+                      <li><a href="/web/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="tag-could" data-toggle="tooltip" data-placement="top" title="线性代数">线性代数</a></li>
+                    
+                      <li><a href="/web/tags/%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" class="tag-could" data-toggle="tooltip" data-placement="top" title="视频相关概念">视频相关概念</a></li>
+                    
+                      <li><a href="/web/tags/FFmpeg/" class="tag-could" data-toggle="tooltip" data-placement="top" title="FFmpeg">FFmpeg</a></li>
+                    
+                      <li><a href="/web/tags/LivePhoto/" class="tag-could" data-toggle="tooltip" data-placement="top" title="LivePhoto">LivePhoto</a></li>
+                    
+                      <li><a href="/web/tags/Universal-Link/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Universal Link">Universal Link</a></li>
+                    
+                      <li><a href="/web/tags/Deep-Link/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Deep Link">Deep Link</a></li>
+                    
+                      <li><a href="/web/tags/WebClip/" class="tag-could" data-toggle="tooltip" data-placement="top" title="WebClip">WebClip</a></li>
+                    
+                      <li><a href="/web/tags/Data-%E5%8D%8F%E8%AE%AE/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Data 协议">Data 协议</a></li>
+                    
+                      <li><a href="/web/tags/base64/" class="tag-could" data-toggle="tooltip" data-placement="top" title="base64">base64</a></li>
+                    
+                      <li><a href="/web/tags/AutoLayout/" class="tag-could" data-toggle="tooltip" data-placement="top" title="AutoLayout">AutoLayout</a></li>
+                    
+                      <li><a href="/web/tags/LayoutGuide/" class="tag-could" data-toggle="tooltip" data-placement="top" title="LayoutGuide">LayoutGuide</a></li>
+                    
+                      <li><a href="/web/tags/SafeArea/" class="tag-could" data-toggle="tooltip" data-placement="top" title="SafeArea">SafeArea</a></li>
+                    
+                  
+                </ul>
+            </div>
+            <script>
+              // 博客侧栏标签云随机色
+              var tag_cloud = $('.tag-could');
+              tag_cloud.each(function () {
+                  var Cnum = 9;
+                  var Crand = parseInt(Math.random() * Cnum);
+                  $(this).addClass("tag-could" + Crand);
+              })
+            </script>
+            <!--返回顶部按钮-->
+            <div class="retop">
+                <i class="fa fa-angle-up"></i>
+            </div>
+        </div><!--博客侧边栏结束-->
+    </div>
+</div>
+<script src="/web/js/LeanStatistics.min.js"></script>
+<script src="/web/js/Life.js"></script>
+<script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+    otherF();
+    LeanStatistics();
+    $(document).pjax('a', '#pjax-box', {fragment:'#pjax-box', timeout:8000}).on('pjax:complete', function() {
+      $('pre code').each(function(i, block){
+        hljs.highlightBlock(block);
+      })
+      $('code.hljs').each(function(i, block) {
+        hljs.lineNumbersBlock(block);
+      });
+      LeanStatistics();
+    }).on('pjax:start', function() { NProgress.start(); }).on('pjax:end',   function() {
+      NProgress.done();
+      otherF();
+    });
+</script>
+</body>
+</html>
