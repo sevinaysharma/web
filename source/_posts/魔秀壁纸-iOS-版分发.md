@@ -7,7 +7,10 @@ categories:
   - itms
 ---
 
+[点击下载 魔秀壁纸 2020-11-03_17-45](itms-services:///?action=download-manifest&url=https%3A%2F%2Fres-jori.obs.cn-north-1.myhuaweicloud.com%2Fmoxiu%2Fwallpaper-ios%2Fitms%2Fmanifest%2F2020-11-03_17-45.plist)
+
 [点击下载 魔秀壁纸 2020-11-03_11-02](itms-services:///?action=download-manifest&url=https%3A%2F%2Fres-jori.obs.cn-north-1.myhuaweicloud.com%2Fmoxiu%2Fwallpaper-ios%2Fitms%2Fmanifest%2F2020-11-03_11-02.plist)
+
 
 [点击下载 魔秀壁纸 2020-10-28_11-37](itms-services:///?action=download-manifest&url=https%3A%2F%2Fres-jori.obs.cn-north-1.myhuaweicloud.com%2Fmoxiu%2Fwallpaper-ios%2Fitms%2Fmanifest%2F2020-10-28_11-37.plist)
 
