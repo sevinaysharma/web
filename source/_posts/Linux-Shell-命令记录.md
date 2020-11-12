@@ -13,5 +13,9 @@ categories:
 // 可以查询系统相关的信息，包括是哪个发行版本等
 lsb_release -a
 
+// 方法 2
 uname -a
+
+// 方法 3
+cat /proc/version
 ```
