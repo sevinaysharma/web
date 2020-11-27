@@ -121,6 +121,17 @@ else if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
 }
 ```
 
+## 程序主动到后台
+
+```
+// 进入后台
+UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+// 结束应用
+DispatchQueue.main.asyncAfter(deadline: .now() + 1.25) {
+  UIApplication.shared.perform(Selector(("terminateWithSuccess")))
+}
+```
+
 # UI
 
 ## 引导用户评论
