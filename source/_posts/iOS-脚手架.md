@@ -227,3 +227,10 @@ BOOL isDarkImage(UIImage* inputImage){
     
 }
 ```
+
+# AppStore
+
+```
+// 查询 app 信息。版本号、预览图、应用图标等
+http://itunes.apple.com/lookup?id=%@
+```
