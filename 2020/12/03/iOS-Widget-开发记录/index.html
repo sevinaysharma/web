@@ -159,6 +159,8 @@
 </ul>
 <h2 id="多-Intent-支持"><a href="#多-Intent-支持" class="headerlink" title="多 Intent 支持"></a>多 Intent 支持</h2><p>当默认使用 <code>SwiftUI.Widget</code> 作为主入口时，Widget Extension 所有类型 Widget 只能共用一个 Intent 类型。</p>
 <p>如果想实现 <code>systemSmall</code> 使用 IntentA，<code>systemMedium</code> 使用 IntentB，<code>systemLarge</code> 使用 IntentC，可以使用 <code>SwiftUI.WidgetBundle</code> 作为主入口</p>
+<h1 id="探索"><a href="#探索" class="headerlink" title="探索"></a>探索</h1><h2 id="Widget-进程问题"><a href="#Widget-进程问题" class="headerlink" title="Widget 进程问题"></a>Widget 进程问题</h2><p>Widget 有自己的进程。并且定义的全局变量会被保留，不会在 <code>getTimeline</code> 方法执行完成后回收。</p>
+<p>假设现在有两个配置可以选择，分别为 A 和 B。当时间线没有耗尽时，切换不同配置不会触发 <code>getTimeline</code> 的频繁回调</p>
 
             
         </section>
