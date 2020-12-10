@@ -80,3 +80,11 @@ Widget 可能处于以下几个状态：预览状态（01）、添加到屏幕�
 当默认使用 `SwiftUI.Widget` 作为主入口时，Widget Extension 所有类型 Widget 只能共用一个 Intent 类型。
 
 如果想实现 `systemSmall` 使用 IntentA，`systemMedium` 使用 IntentB，`systemLarge` 使用 IntentC，可以使用 `SwiftUI.WidgetBundle` 作为主入口
+
+# 探索
+
+## Widget 进程问题
+
+Widget 有自己的进程。并且定义的全局变量会被保留，不会在 `getTimeline` 方法执行完成后回收。
+
+假设现在有两个配置可以选择，分别为 A 和 B。当时间线没有耗尽时，切换不同配置不会触发 `getTimeline` 的频繁回调
