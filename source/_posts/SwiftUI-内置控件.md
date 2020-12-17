@@ -9,4 +9,4 @@ categories:
 
 官方文档请参考 [Views and Controls](https://developer.apple.com/documentation/swiftui/views-and-controls)
 
-![SwiftUI结构关系图](1.png)
+![SwiftUI结构关系图](1.jpg)
