@@ -6,7 +6,6 @@ language: zh
 menu:
   首页: /web
   关于: /about/
-  链接: /links/
 
 # 网站右边栏头像(图片路径或链接)
 logo: http://dl.weic96.cn/logo.png

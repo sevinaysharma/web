@@ -5,6 +5,7 @@ tags:
  - SwiftUI
 categories:
  - iOS
+toc: true
 ---
 
 # Debug
@@ -24,3 +25,13 @@ func debug() -> Self {
 
 ![第一步](01.jpg)
 ![第二步](02.jpg)
+
+# UI
+
+## LiberyContentProvider
+
+可以构建自己的组件库，像系统控件一样被 XCode 识别，并预览
+
+![](03.webp)
+![](04.webp)
+
