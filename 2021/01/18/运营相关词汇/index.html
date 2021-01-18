@@ -1,0 +1,554 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no", user-scalable=no">
+  <title>如何计算APP的LTV和CACHello Skill</title>
+  <link rel="shortcut icon" href="">
+  
+    
+    
+      <link rel="stylesheet" href="/web/css/bootstrap.min.css">
+    
+      <link rel="stylesheet" href="/web/css/font-awesome.min.css">
+    
+      <link rel="stylesheet" href="/web/css/atom-one-dark.css">
+    
+      <link rel="stylesheet" href="/web/css/jquery.fancybox.css">
+    
+      <link rel="stylesheet" href="/web/css/nprogress.min.css">
+    
+      <link rel="stylesheet" href="/web/css/valine.css">
+    
+      <link rel="stylesheet" href="/web/css/life.css">
+    
+  
+
+  
+
+  <!-- jQuery first, then Tether, then Bootstrap JS. -->
+  
+  
+  
+    <script src="/web/js/jquery-2.2.4.min.js"></script>
+  
+    <script src="https://cdn1.lncld.net/static/js/3.1.0/av-min.js"></script>
+  
+    <script src="/web/js/jquery.pjax.js"></script>
+  
+    <script src="/web/js/nprogress.min.js"></script>
+  
+    <script src="/web/js/tether.min.js"></script>
+  
+    <script src="/web/js/bootstrap.min.js"></script>
+  
+    <script src="/web/js/highlight.min.js"></script>
+  
+    <script src="/web/js/highlightjs-line-numbers.min.js"></script>
+  
+    <script src="/web/js/jquery.fancybox.js"></script>
+  
+    <script src="/web/js/jquery.qrcode.min.js"></script>
+  
+    <script src="/web/js/Valine.min.js"></script>
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+<script>AV.init({appId:'',appKey:''});</script>
+<script type="text/javascript">
+      var config = {
+            ClasS: 'Counter',
+            el:'.views',
+            elP: '.views-post'
+      }
+</script>
+<div class="container">
+    <div class="row blog-box-shadow">
+        <!--博客主栏开始-->
+        <div class="col-xl-9 col-lg-12 blog-main" id="pjax-box">
+            <header class="blog-header">
+                <a href="https://joriwang.github.io/web" class="blog-header-mobile-title">Hello Skill</a>
+                <a href="javascript:;" class="blog-header-navbar-btn"><i class="fa fa-bars"></i></a>
+                <nav class="blog-header-navbar blog-header-fixed">
+                    <ul class="blog-navbar-links">
+                        
+                          <li class="blog-nav-item"><a href="/web" class="transition">首页</a></li>
+                        
+                          <li class="blog-nav-item"><a href="/about/" class="transition">关于</a></li>
+                        
+                        <div class="blog-navbar-right">
+                            <form action="">
+                                <div class="input-group">
+                                    <input type="text" class="blog-header-search" placeholder="search...">
+                                    <buttn type="submit" class="blog-header-search-btn"><i class="fa fa-search"></i></buttn>
+                                </div>
+                            </form>
+                        </div>
+                    </ul>
+                </nav>
+            </header>
+                
+<header class="blog-post-page-title">
+    <h4>如何计算APP的LTV和CAC</h4>
+    <time datetime="2021-01-18T07:56:52.000Z"><i class="fa fa-clock-o"></i>2021-01-18</time>
+    
+    
+    
+    
+	
+        <span><i class="fa fa-folder-o"></i>
+    		
+    	       <a href="/web/categories/%E8%BF%90%E8%90%A5/" rel="categories" data-toggle="tooltip" data-placement="top" title="Linux">运营</a>
+    		
+        </span>
+	
+    
+</header>
+<div class="blog-main-post blog-post-page-box">
+    <article class="blog-post-block blog-post-page-content">
+        <section>
+            
+                <h1 id="一、LTV和CAC的定义"><a href="#一、LTV和CAC的定义" class="headerlink" title="一、LTV和CAC的定义"></a>一、LTV和CAC的定义</h1><p>LTV(Life Time Value)生命周期总价值，是指用户终身价值，是公司从用户所有的互动中所得到的全部经济收益的总和。一个用户从注册到卸载，整个生命周期为你带来的全部利润。</p>
+<p>CAC（Customer Acquisition Cost）是指用户获取成本，即是你花多少钱获取一个客户。</p>
+<h1 id="二、计算LTV和CAC的意义"><a href="#二、计算LTV和CAC的意义" class="headerlink" title="二、计算LTV和CAC的意义"></a>二、计算LTV和CAC的意义</h1><p>做产品的新用户获取时，一定要遵循的原则是，获取用户的成本要小于用户给我们带来的价值。</p>
+<p>简单来说，在新用户的获取上，要保证一个用户在整个生命周期中给产品带来的价值（LTV）大于获取这个新用户所耗费的成本（CAC），否则获取的用户越多，亏损越严重。即LTV&gt;CAC ，公式看似简单，却是用户获取的本质约束。</p>
+<p>市场普遍认为：</p>
+<blockquote>
+<p>LTV&gt;CAC的时候公司是有发展空间的，一般有明确的变现方式，这时市场可以继续推广自己的产品，吸纳更多的用户；<br>LTV&lt;CAC的时候模式要么是产品还在初期发展，要么就是商业变现失败的，应该重新审视产品的发展；<br>LTV/CAC=3的时候是最健康发展的（小于3说明转化效率低，大于3说明在市场拓展上还太保守）。<br>我们可以用LTV/CAC的值去判定产品的发展情况，是否有潜力，及时调整营销战略。当然这个指数也不是唯一标准，企业还需要考虑相关营销指标和 KPI。比如，每月收入增长、客户增长和流失等。</p>
+</blockquote>
+<p>三、LTV的计算</p>
+<p><code>LTV=LT * ARPU</code></p>
+<p>其中，LT（Life Time）为用户的平均生命周期，是指一个用户从第一次到最后一次使用产品之间的时间段。</p>
+<p>ARPU(Average Revenue Per User)即每用户平均收入。</p>
+<p><img src="01.webp" alt=""></p>
+<p>如上图所示，横坐标为LT，纵坐标为ARPU，曲线下方蓝色阴影面积为LTV的大小。</p>
+<h2 id="LT的计算公式"><a href="#LT的计算公式" class="headerlink" title="LT的计算公式"></a>LT的计算公式</h2><p><img src="02.webp" alt=""></p>
+<p>举例，某日新增500个新用户，之后的第一天这批用户剩余400个，留存率为80%；第二天剩余300个，留存率为60%；则LT=（500+400+300）/500=2.4天；或者用第二个公式得出LT=1+80%+60%=2.4天。以此类推时间~</p>
+<p>综上，将新增用户数假定为A，第一天后留存数为A1，第N天后留存数为An；第一天留存率为R1，第N天留存率为Rn，整理出公式如下：</p>
+<p><img src="03.webp" alt=""></p>
+<h2 id="LT的具体案例计算"><a href="#LT的具体案例计算" class="headerlink" title="LT的具体案例计算"></a>LT的具体案例计算</h2><p>一般的APP接入数据分析平台的话，可以在后台看到具体的留存率数字。后面就以某一个月的数据来算，下图为一个月的具体数据：</p>
+<p><img src="04.webp" alt=""></p>
+<p>将数据复制粘贴到excel中，做函数分析</p>
+<p><img src="05.webp" alt=""></p>
+<p>用上面的数据【插入-图表-散点图】，图表如上图所示，右键【添加趋势线】</p>
+<p><img src="06.webp" alt=""></p>
+<p>在【趋势线选项】中，有指数、线性、对数、多项式、幂、移动平均多个选项，大家比对自己的数据点，选择一条拟合程度最好的，我一般都是选择【对数】。</p>
+<p>最下面勾选【显示公式】和【显示R平方值】，R² 代表拟合度，R² 越接近1说明拟合度越高。</p>
+<p>所以LT的函数为【y = -0.096ln(x) + 0.5347】，对于需要超过一个月或者更长时间留存率数据的，都可以代入函数得到。</p>
+<p>从上面的公式可以知道，我们要求的LT其实就是留存率之和，即图下蓝色区域面积</p>
+<p><img src="07.webp" alt=""></p>
+<p>方法一：</p>
+<p>数学好的朋友可以运用定积分计算函数【y = -0.096ln(x) + 0.5347】下方的面积。</p>
+<p>方法二：</p>
+<p>因为对定积分不太熟悉，我使用的是excel简单求和法，就简单把自己需要的数据用公式求值，如下图所示:</p>
+<p><img src="08.webp" alt=""></p>
+<p>最终 excel 求和得到数据 8.87，所以在我选择的一个月时间LT平均生命周期为 9.87 天。</p>
+<h2 id="ARPU的计算"><a href="#ARPU的计算" class="headerlink" title="ARPU的计算"></a>ARPU的计算</h2><p><img src="09.webp" alt=""></p>
+<p>ARPU值是有时间属性的，你可以讲日ARPU、月ARPU等。这里我依然选用一个月的数据。</p>
+<p>根据财务提供的收入数据和后台的月活数据，求得ARPU值为0.5元/月。因为我的产品属于工具类，整体数值偏低，大家还是以自己的数据为准。</p>
+<h2 id="LTV的计算"><a href="#LTV的计算" class="headerlink" title="LTV的计算"></a>LTV的计算</h2><p>综上，我们求得LT=9.87天，ARPU=0.5元/月，这里常见的一个错误时，很多会粗心不看单位，一个是天，一个是月，我们在算LTV时，要记得单位统一。</p>
+<p><strong>LTV=9.87*（0.5/31）=0.16元</strong></p>
+<h1 id="CAC的计算"><a href="#CAC的计算" class="headerlink" title="CAC的计算"></a>CAC的计算</h1><p>很多人介绍CAC的计算时，都会一笔带过，其实CAC的计算也有很多注意点。</p>
+<p>首先计算公式为：</p>
+<p><img src="10.webp" alt=""></p>
+<p>其中市场总花费包括推广渠道费用、营销和销售费用，还包括相关运营、市场工作人员的人力成本。一般公司财务都可以提供相关数据。</p>
+<p>另外需要提醒的是，这里的CAC是个平均值。在市场推广时，很多公司可能会使用多个渠道，每个渠道的CAC都不同，可以分开计算作优化。</p>
+<p>用户新增数很多人会存在误区，直接在数据后台使用日新增数据，没有区别自然增长和渠道推广增长。</p>
+<p>那么如何区分自己产品的自然增长和渠道推广增长的用户数呢？</p>
+<p> 首先，具体数据方面我仍然参考APP数据平台数据，在APP分析中有一个【渠道列表】可以看到每个渠道用户每日新增数量，和市场沟通确认打榜时间和具体渠道，当然友盟的折线图也可以看出前后的差异。</p>
+<p><img src="11.webp" alt=""></p>
+<p>因为我们的产品每月一次 ASO 优化，所以我一般选择渠道推广前 10 天和推广中 10 天的数据<strong>差值</strong>，作为市场新增用户的数量。如果存在一个月多次优化，则可根据实际情况，估算出新增数。</p>
+<p>此外若存在地推等其他渠道的推广，可以请技术做渠道标，带上参数，方便后期的数据整理。</p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="http://www.woshipm.com/operate/3570208.html" target="_blank" rel="noopener">如何计算APP的LTV和CAC？</a></p>
+
+            
+        </section>
+        <footer class="blog-post-page-tags">
+        
+			
+				
+			<a href="/web/tags/LTV/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">LTV</a>
+				
+			<a href="/web/tags/CAC/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">CAC</a>
+				
+			
+		
+        </footer>
+    </article>
+    <article class="blog-post-page-readmore">
+    	
+    	
+		
+
+		
+		
+			<a href="/web/2021/01/14/%E5%B8%B8%E7%94%A8%E5%8E%9F%E5%9E%8B%E5%B7%A5%E5%85%B7/" class="blog-post-page-readmore-next" data-toggle="tooltip" data-placement="top" title="常用原型工具">下一篇</a>
+		
+
+        <div style="clear: both;"></div>
+    </article>
+
+    <article class="blog-post-block blog-post-page-content">
+            <div class="row">
+            
+                <div class="col-md-4 col-sm-4 post-page-more-btn">
+                    <span  data-toggle="modal" data-target="#post-donate-content">
+                        <span id="post-donate-btn" class="btn btn-danger btn-block" data-toggle="tooltip" data-placement="top" title="如果您觉得本文还不错或者对您有帮助，可以考虑打赏一下作者哦">打赏本文</span>
+                    </span>
+                </div>
+                <div class="col-md-4 col-sm-4 post-page-more-btn">
+                    <span  data-toggle="modal" data-target="#post-qrcode-content">
+                        <span><span id="post-qrcode-btn" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="微信扫描二维码手机端查看本文及分享本文">二维码</span></span>
+                    </span>
+                </div>
+            </div>
+        <div class="post-more-function-br"></div>
+
+        <div class="modal fade" id="post-donate-content" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">打赏本文</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row post-donate-content">
+                            <div class="col-md-4">
+                                <p>支付宝</p>
+                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/alipay.jpg"/>
+                            </div>
+                            <div class="col-md-4">
+                                <p>微信</p>
+                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/wechat.png"/>
+                            </div>
+                            <div class="col-md-4">
+                                <p>财付通</p>
+                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/qqpay.png"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="post-qrcode-content" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">文章二维码</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row post-qrcode-content">
+                            <span class="post-qrcode-content-canvas"></span>
+                            <img class="post-qrcode-content-img no-lightbox" src=""/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // post QRcode
+            // 中文转码
+            function toUtf8(str) {
+                var out, i, len, c;
+                out = "";
+                len = str.length;
+                for (i = 0; i < len; i++) {
+                    c = str.charCodeAt(i);
+                    if ((c >= 0x0001) && (c <= 0x007F)) {
+                        out += str.charAt(i);
+                    } else if (c > 0x07FF) {
+                        out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                        out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
+                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                    } else {
+                        out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
+                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                    }
+                }
+                return out;
+            }
+            // 生成
+            var qrcode= $('.post-qrcode-content-canvas').qrcode({width: 150,height: 150,text: toUtf8("https://joriwang.github.io/web/2021/01/18/%E8%BF%90%E8%90%A5%E7%9B%B8%E5%85%B3%E8%AF%8D%E6%B1%87/")}).hide();
+            var canvas=qrcode.find('canvas').get(0);
+            $('.post-qrcode-content-img').attr('src',canvas.toDataURL('image/jpg'));
+        </script>
+
+        
+    </article>
+    
+</div>
+
+                
+            <footer class="blog-footer">
+                <p class="blog-footer-left">Copyright ©  2021 <a href="https://joriwang.github.io/web">Hello Skill</a></p>
+                <p class="blog-footer-right">Powered by <a href="https://hexo.io" target="_blank">Hexo</a>,Theme <a href="https://note.isweic.com/themes-life/" target="_blank">Life</a></p>
+            </footer>
+        </div><!--博客主栏结束-->
+        <!--博客侧边栏开始-->
+        <div class="col-xl-3 blog-sidebar">
+            <div class="blog-sidebar-title">
+                <a href="">Hello Skill</a>
+            </div>
+            <div class="blog-sidebar-logo">
+                <img src="http://dl.weic96.cn/logo.png">
+            </div>
+            <div class="blog-sidebar-count blog-sidebar-padding">
+                <div class="blog-sidebar-count-left">
+                    <p class="blog-sidebar-count-p">34</p>
+                    <span class="blog-sidebar-count-span">文章</span>
+                </div>
+                <div class="blog-sidebar-count-right">
+                    <p class="blog-sidebar-count-p">37</p>
+                    <span class="blog-sidebar-count-span">标签</span>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="blog-sidebar-icon blog-sidebar-padding">
+                <ul>
+                    <li><a href="https://github.com/joriwang/" class="icon-github" target="_blank" data-toggle="tooltip" data-placement="top" title="Github"><i class="fa fa-github"></i></a></li>
+                    <li><a href="" class="icon-weibo" target="_blank" data-toggle="tooltip" data-placement="top" title="新浪微博"><i class="fa fa-weibo"></i></a></li>
+                    <li><a href="" class="icon-twitter" target="_blank" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                    <!--<li><a href="" class="icon-facebook" target="_blank" data-toggle="tooltip" data-placement="top" title="FaceBook"><i class="fa fa-facebook"></i></a></li>-->
+                    <li><a href="mailto:463398425@qq.com" class="icon-email" data-toggle="tooltip" data-placement="top" title="E-Mail"><i class="fa fa-envelope"></i></a></li>
+                    <li><a href="" class="icon-rss" data-toggle="tooltip" target="_blank" data-placement="top" title="RSS"><i class="fa fa-rss"></i></a></li>
+                </ul>
+            </div>
+            <div class="blog-sidebar-categories">
+                <h4 class="blog-sidebar-h4"><i class="fa fa-folder-open"></i>&nbsp;文章分类</h4>
+                <ul class="list-group blog-sidebar-padding">
+                  
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/Android/">Android</a>
+                          <span class="badge badge-default badge-pill">3</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/iOS/">iOS</a>
+                          <span class="badge badge-default badge-pill">18</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/git/">git</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/GitHub/">GitHub</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E5%B9%B3%E5%8F%B0%E5%B7%A5%E5%85%B7/">平台工具</a>
+                          <span class="badge badge-default badge-pill">2</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/SQLite/">SQLite</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/iOS/SwiftUI/">SwiftUI</a>
+                          <span class="badge badge-default badge-pill">2</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/xcode/">xcode</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/itms/">itms</a>
+                          <span class="badge badge-default badge-pill">2</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E4%BA%A7%E5%93%81/">产品</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/iOS/Android/">Android</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E8%BF%90%E8%90%A5/">运营</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                      <li class="list-group-item justify-content-between">
+                          <a href="/web/categories/iOS/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
+                          <span class="badge badge-default badge-pill">1</span>
+                      </li>
+                    
+                  
+                </ul>
+            </div>
+            <div class="blog-sidebar-tags">
+                <h4 class="blog-sidebar-h4"><i class="fa fa-tag"></i>&nbsp;标签云</h4>
+                <ul class="blog-sidebar-tags-ul blog-sidebar-padding">
+                  
+                    
+                      <li><a href="/web/tags/Android-%E5%83%8F%E7%B4%A0%E5%AF%86%E5%BA%A6/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Android 像素密度">Android 像素密度</a></li>
+                    
+                      <li><a href="/web/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="tag-could" data-toggle="tooltip" data-placement="top" title="生命周期">生命周期</a></li>
+                    
+                      <li><a href="/web/tags/Android/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Android">Android</a></li>
+                    
+                      <li><a href="/web/tags/APK/" class="tag-could" data-toggle="tooltip" data-placement="top" title="APK">APK</a></li>
+                    
+                      <li><a href="/web/tags/cocoapods/" class="tag-could" data-toggle="tooltip" data-placement="top" title="cocoapods">cocoapods</a></li>
+                    
+                      <li><a href="/web/tags/Linun-%E5%91%BD%E4%BB%A4/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Linun 命令">Linun 命令</a></li>
+                    
+                      <li><a href="/web/tags/C-OC-%E8%BE%93%E5%87%BA%E5%8D%A0%E4%BD%8D%E7%AC%A6/" class="tag-could" data-toggle="tooltip" data-placement="top" title="C/OC 输出占位符">C/OC 输出占位符</a></li>
+                    
+                      <li><a href="/web/tags/SQLite/" class="tag-could" data-toggle="tooltip" data-placement="top" title="SQLite">SQLite</a></li>
+                    
+                      <li><a href="/web/tags/Swift/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Swift">Swift</a></li>
+                    
+                      <li><a href="/web/tags/SwiftUI/" class="tag-could" data-toggle="tooltip" data-placement="top" title="SwiftUI">SwiftUI</a></li>
+                    
+                      <li><a href="/web/tags/%E4%BF%AE%E9%A5%B0%E5%99%A8/" class="tag-could" data-toggle="tooltip" data-placement="top" title="修饰器">修饰器</a></li>
+                    
+                      <li><a href="/web/tags/xcode/" class="tag-could" data-toggle="tooltip" data-placement="top" title="xcode">xcode</a></li>
+                    
+                      <li><a href="/web/tags/iMessage/" class="tag-could" data-toggle="tooltip" data-placement="top" title="iMessage">iMessage</a></li>
+                    
+                      <li><a href="/web/tags/iOS14-Widget/" class="tag-could" data-toggle="tooltip" data-placement="top" title="iOS14 Widget">iOS14 Widget</a></li>
+                    
+                      <li><a href="/web/tags/APNS/" class="tag-could" data-toggle="tooltip" data-placement="top" title="APNS">APNS</a></li>
+                    
+                      <li><a href="/web/tags/itms/" class="tag-could" data-toggle="tooltip" data-placement="top" title="itms">itms</a></li>
+                    
+                      <li><a href="/web/tags/OC/" class="tag-could" data-toggle="tooltip" data-placement="top" title="OC">OC</a></li>
+                    
+                      <li><a href="/web/tags/%E9%94%81%E5%B1%8F%E5%BC%80%E7%81%AF%E5%8A%A8%E6%95%88/" class="tag-could" data-toggle="tooltip" data-placement="top" title="锁屏开灯动效">锁屏开灯动效</a></li>
+                    
+                      <li><a href="/web/tags/iOS-%E7%BE%8E%E5%8C%96/" class="tag-could" data-toggle="tooltip" data-placement="top" title="iOS 美化">iOS 美化</a></li>
+                    
+                      <li><a href="/web/tags/%E5%8E%9F%E5%9E%8B/" class="tag-could" data-toggle="tooltip" data-placement="top" title="原型">原型</a></li>
+                    
+                      <li><a href="/web/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="tag-could" data-toggle="tooltip" data-placement="top" title="开发工具">开发工具</a></li>
+                    
+                      <li><a href="/web/tags/APP%E5%BC%80%E5%8F%91%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B/" class="tag-could" data-toggle="tooltip" data-placement="top" title="APP开发大致流程">APP开发大致流程</a></li>
+                    
+                      <li><a href="/web/tags/UI-%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80%E6%8A%80%E8%83%BD/" class="tag-could" data-toggle="tooltip" data-placement="top" title="UI 必备基础技能">UI 必备基础技能</a></li>
+                    
+                      <li><a href="/web/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="tag-could" data-toggle="tooltip" data-placement="top" title="线性代数">线性代数</a></li>
+                    
+                      <li><a href="/web/tags/%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" class="tag-could" data-toggle="tooltip" data-placement="top" title="视频相关概念">视频相关概念</a></li>
+                    
+                      <li><a href="/web/tags/FFmpeg/" class="tag-could" data-toggle="tooltip" data-placement="top" title="FFmpeg">FFmpeg</a></li>
+                    
+                      <li><a href="/web/tags/LTV/" class="tag-could" data-toggle="tooltip" data-placement="top" title="LTV">LTV</a></li>
+                    
+                      <li><a href="/web/tags/CAC/" class="tag-could" data-toggle="tooltip" data-placement="top" title="CAC">CAC</a></li>
+                    
+                      <li><a href="/web/tags/LivePhoto/" class="tag-could" data-toggle="tooltip" data-placement="top" title="LivePhoto">LivePhoto</a></li>
+                    
+                      <li><a href="/web/tags/Universal-Link/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Universal Link">Universal Link</a></li>
+                    
+                      <li><a href="/web/tags/Deep-Link/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Deep Link">Deep Link</a></li>
+                    
+                      <li><a href="/web/tags/WebClip/" class="tag-could" data-toggle="tooltip" data-placement="top" title="WebClip">WebClip</a></li>
+                    
+                      <li><a href="/web/tags/Data-%E5%8D%8F%E8%AE%AE/" class="tag-could" data-toggle="tooltip" data-placement="top" title="Data 协议">Data 协议</a></li>
+                    
+                      <li><a href="/web/tags/base64/" class="tag-could" data-toggle="tooltip" data-placement="top" title="base64">base64</a></li>
+                    
+                      <li><a href="/web/tags/AutoLayout/" class="tag-could" data-toggle="tooltip" data-placement="top" title="AutoLayout">AutoLayout</a></li>
+                    
+                      <li><a href="/web/tags/LayoutGuide/" class="tag-could" data-toggle="tooltip" data-placement="top" title="LayoutGuide">LayoutGuide</a></li>
+                    
+                      <li><a href="/web/tags/SafeArea/" class="tag-could" data-toggle="tooltip" data-placement="top" title="SafeArea">SafeArea</a></li>
+                    
+                  
+                </ul>
+            </div>
+            <script>
+              // 博客侧栏标签云随机色
+              var tag_cloud = $('.tag-could');
+              tag_cloud.each(function () {
+                  var Cnum = 9;
+                  var Crand = parseInt(Math.random() * Cnum);
+                  $(this).addClass("tag-could" + Crand);
+              })
+            </script>
+            <!--返回顶部按钮-->
+            <div class="retop">
+                <i class="fa fa-angle-up"></i>
+            </div>
+        </div><!--博客侧边栏结束-->
+    </div>
+</div>
+<script src="/web/js/LeanStatistics.min.js"></script>
+<script src="/web/js/Life.js"></script>
+<script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+    otherF();
+    LeanStatistics();
+    $(document).pjax('a', '#pjax-box', {fragment:'#pjax-box', timeout:8000}).on('pjax:complete', function() {
+      $('pre code').each(function(i, block){
+        hljs.highlightBlock(block);
+      })
+      $('code.hljs').each(function(i, block) {
+        hljs.lineNumbersBlock(block);
+      });
+      LeanStatistics();
+    }).on('pjax:start', function() { NProgress.start(); }).on('pjax:end',   function() {
+      NProgress.done();
+      otherF();
+    });
+</script>
+</body>
+</html>
