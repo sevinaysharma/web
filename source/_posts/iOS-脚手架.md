@@ -233,4 +233,9 @@ BOOL isDarkImage(UIImage* inputImage){
 ```
 // 查询 app 信息。版本号、预览图、应用图标等
 http://itunes.apple.com/lookup?id=%@
+
+// 跳转应用商店详情
+NSString *urlStr = [NSString stringWithFormat:@"https://itunes.apple.com/app/id%@", APPID];
+NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", APPID];
+[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
 ```
