@@ -1,11 +1,11 @@
 ---
 title: Android 获取 APK 信息
-date: 2020-07-20 19:26:43
+date: 2020-07-20
 tags:
-- Android
-- APK
+ - Android
+ - APK
 categories:
-- Android
+ - Android
 ---
 
 
