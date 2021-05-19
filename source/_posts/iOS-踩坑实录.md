@@ -79,3 +79,53 @@ categories:
 **问题回顾**
 
 本质还是忽略了每个设备需要单独配置，这些配置包括但不限于国际化文件（string、xib等）、plist。不同设备以文件名区分。比如用于 iPad 的配置文件名格式为 `name~iPad.ext`。具体描述参考官方文档
+
+## XIB
+
+**问题描述**
+
+有两个 XIB 布局 A 和 B，在对应的 XIB 中指定根节点 View 的类分别为 A、B，然后在 A 的 XIB 添加一个子 View（a），并指定其类型为 B。并在 A 类中设置 a 的 IBOutlet。使用如下代码加载 XIB
+
+```
+@interface A
+
+@property(nonatomic, weak) IBOutlet B *aSubview;
+
+@end
+
+@implementation A
+@end
+
+@interface B
+
+@property(nonatomic, weak) IBOutlet UILabel *titleLabel;
+
+@end
+
+@implementation B
+@end
+```
+
+```
+A *view = (A *)[[[UINib nibWithNibName:@"A" bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
+// 或者
+[[NSBundle mainBundle] loadNibNamed:@"A" owner:nil options:nil];
+```
+
+然后 发现 view 的 aSubview 实例自身的属性(titleLabel)为空（nil）。
+
+**问题探索**
+
+系统在加载 XIB 的时候会按照类型依次初始化其 subview，调用对应的 `- (instancetype)initWithCoder:(NSCoder *)coder` 方法。这里需要注意的是，此时如果，该 subview 也是通过 XIB 布局的（比如 B），就会导致 B 仅仅是把对应的类初始化，当不会加载其对应的 XIB 布局。所以需要正确处理 `- (instancetype)initWithCoder:(NSCoder *)coder` 方法。
+
+这里就需要用到 XIB 中 *Placeholders* 中的 *File's Owner* 属性。在 B 的 XIB 中，将这个属性对应的类指定为 B。然后重写 B 对应的 `- (instancetype)initWithCoder:(NSCoder *)coder` 方法
+
+```
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    if (self = [super initWithCoder:coder]) {
+        UIView *view = (UIView *)[[[UINib nibWithNibName:@"A" bundle:nil] instantiateWithOwner:self options:nil] firstObject];
+        [self addSubview:view];
+        // 设置 view 的 frame 或者 约束
+    }
+}
+```
