@@ -4,6 +4,8 @@
 
 
 
+  
+
 
 
 
@@ -20,7 +22,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <meta name="renderer" content="webkit">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no", user-scalable=no">
-  <title>Android 获取 APK 信息Hello Skill</title>
+  <title>Tag: iOS FrameHello Skill</title>
   <link rel="shortcut icon" href="">
   
     
@@ -106,170 +108,54 @@
                 </nav>
             </header>
                 
-<header class="blog-post-page-title">
-    <h4>Android 获取 APK 信息</h4>
-    <time datetime="2020-07-20T11:26:43.000Z"><i class="fa fa-clock-o"></i>2020-07-20</time>
-    
-    
-    
-    
-	
-        <span><i class="fa fa-folder-o"></i>
-    		
-    	       <a href="/web/categories/Android/" rel="categories" data-toggle="tooltip" data-placement="top" title="Linux">Android</a>
-    		
-        </span>
-	
-    
+<header class="blog-post-page-title blog-search-page-title">
+  <h4>标签<a href="">iOS Frame</a>下的文章</h4>
 </header>
 <div class="blog-main-post blog-post-page-box">
-    <article class="blog-post-block blog-post-page-content">
-        <section>
-            
-                <h2 id="获取设备已安装软件的包名"><a href="#获取设备已安装软件的包名" class="headerlink" title="获取设备已安装软件的包名"></a>获取设备已安装软件的包名</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="keyword">shell</span><span class="bash"> pm list packages</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="根据包名获取安装路径"><a href="#根据包名获取安装路径" class="headerlink" title="根据包名获取安装路径"></a>根据包名获取安装路径</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="keyword">shell</span><span class="bash"> pm path <span class="variable">$&#123;packageName&#125;</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="从设备下载文件"><a href="#从设备下载文件" class="headerlink" title="从设备下载文件"></a>从设备下载文件</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="keyword">shell</span><span class="bash"> pull <span class="variable">$&#123;filePath&#125;</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="查看-APK-的-Manifest"><a href="#查看-APK-的-Manifest" class="headerlink" title="查看 APK 的 Manifest"></a>查看 APK 的 Manifest</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">aapt</span> <span class="selector-tag">dump</span> <span class="selector-tag">xmltree</span> <span class="selector-tag">apkName</span><span class="selector-class">.apk</span> <span class="selector-tag">AndroidManifest</span><span class="selector-class">.xml</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="aapt-解析包信息"><a href="#aapt-解析包信息" class="headerlink" title="aapt 解析包信息"></a>aapt 解析包信息</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">aapt</span> d <span class="keyword">badging </span>apkName.apk</span><br></pre></td></tr></table></figure>
-
-<h2 id="dumpsys"><a href="#dumpsys" class="headerlink" title="dumpsys"></a>dumpsys</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 支持的服务列表。常用的为 activity</span><br><span class="line">adb <span class="keyword">shell</span><span class="bash"> dumpsys -l</span></span><br><span class="line"></span><br><span class="line">// 使用方法可以搜索或者查看帮助文档</span><br><span class="line">adb <span class="keyword">shell</span><span class="bash"> dumpsys <span class="variable">$&#123;serviceName&#125;</span> -h</span></span><br><span class="line">// 比如</span><br><span class="line">adb <span class="keyword">shell</span><span class="bash"> dumpsys activity -h</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="apktool"><a href="#apktool" class="headerlink" title="apktool"></a>apktool</h2><p>解完包就没有秘密了，怎么用自己去搜索。</p>
-
-            
-        </section>
-        <footer class="blog-post-page-tags">
+  
+    <article class="blog-post-block">
         
-			
-				
-			<a href="/web/tags/Android/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">Android</a>
-				
-			<a href="/web/tags/APK/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">APK</a>
-				
-			
-		
-        </footer>
-    </article>
-    <article class="blog-post-page-readmore">
-    	
-    	
-		
-			<a href="/web/2020/08/11/LivePhoto/" class="blog-post-page-readmore-prev" data-toggle="tooltip" data-placement="top" title="LivePhoto">上一篇</a>
-		
+        <div class="blog-post-block-padding">
+          
+            <a href="/web/2021/05/18/iOS-%E5%B8%83%E5%B1%80-%E5%B0%BA%E5%AF%B8%E8%AE%A1%E7%AE%97/">iOS 布局-尺寸计算</a>
+          
+            <section>
+              
+                
+                原味地址：https://zhangbuhuai.com/post/auto-layout-part-1.html
+iOS 布局机制iOS 布局机制大概分这么几个层次：
 
-		
-		
-			<a href="/web/2020/07/17/Android-%E5%83%8F%E7%B4%A0%E5%AF%86%E5%BA%A6/" class="blog-post-page-readmore-next" data-toggle="tooltip" data-placement="top" title="Android 像素密度">下一篇</a>
-		
+frame layout
+autoresizing
+auto layout
 
-        <div style="clear: both;"></div>
-    </article>
-
-    <article class="blog-post-block blog-post-page-content">
-            <div class="row">
-            
-                <div class="col-md-4 col-sm-4 post-page-more-btn">
-                    <span  data-toggle="modal" data-target="#post-donate-content">
-                        <span id="post-donate-btn" class="btn btn-danger btn-block" data-toggle="tooltip" data-placement="top" title="如果您觉得本文还不错或者对您有帮助，可以考虑打赏一下作者哦">打赏本文</span>
-                    </span>
-                </div>
-                <div class="col-md-4 col-sm-4 post-page-more-btn">
-                    <span  data-toggle="modal" data-target="#post-qrcode-content">
-                        <span><span id="post-qrcode-btn" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="微信扫描二维码手机端查看本文及分享本文">二维码</span></span>
-                    </span>
-                </div>
-            </div>
-        <div class="post-more-function-br"></div>
-
-        <div class="modal fade" id="post-donate-content" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">打赏本文</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row post-donate-content">
-                            <div class="col-md-4">
-                                <p>支付宝</p>
-                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/alipay.jpg"/>
-                            </div>
-                            <div class="col-md-4">
-                                <p>微信</p>
-                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/wechat.png"/>
-                            </div>
-                            <div class="col-md-4">
-                                <p>财付通</p>
-                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/qqpay.png"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                    </div>
-                </div>
-            </div>
+Frame
+                ...
+              
+            </section>
+            <footer>
+                <time datetime="2021-05-18T16:00:00.000Z><i class="fa fa-clock-o"></i>2021-05-19</time>
+                
+                
+                
+                
+                  <span><i class="fa fa-folder-o"></i>
+                    
+                      <a href="/web/categories/iOS/" itemprop="url" rel="index">
+                        iOS
+                      </a>
+                    
+                  </span>
+                
+            </footer>
         </div>
-
-        <div class="modal fade" id="post-qrcode-content" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">文章二维码</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row post-qrcode-content">
-                            <span class="post-qrcode-content-canvas"></span>
-                            <img class="post-qrcode-content-img no-lightbox" src=""/>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <script>
-            // post QRcode
-            // 中文转码
-            function toUtf8(str) {
-                var out, i, len, c;
-                out = "";
-                len = str.length;
-                for (i = 0; i < len; i++) {
-                    c = str.charCodeAt(i);
-                    if ((c >= 0x0001) && (c <= 0x007F)) {
-                        out += str.charAt(i);
-                    } else if (c > 0x07FF) {
-                        out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
-                        out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
-                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
-                    } else {
-                        out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
-                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
-                    }
-                }
-                return out;
-            }
-            // 生成
-            var qrcode= $('.post-qrcode-content-canvas').qrcode({width: 150,height: 150,text: toUtf8("https://joriwang.github.io/web/2020/07/20/Android-%E8%8E%B7%E5%8F%96-APK-%E4%BF%A1%E6%81%AF/")}).hide();
-            var canvas=qrcode.find('canvas').get(0);
-            $('.post-qrcode-content-img').attr('src',canvas.toDataURL('image/jpg'));
-        </script>
-
-        
     </article>
+  
     
+    <nav id="pagination" class="blog-pagination">
+            <span class="page-number current">1</span>
+    </nav>
+
 </div>
 
                 
@@ -288,11 +174,11 @@
             </div>
             <div class="blog-sidebar-count blog-sidebar-padding">
                 <div class="blog-sidebar-count-left">
-                    <p class="blog-sidebar-count-p">39</p>
+                    <p class="blog-sidebar-count-p">40</p>
                     <span class="blog-sidebar-count-span">文章</span>
                 </div>
                 <div class="blog-sidebar-count-right">
-                    <p class="blog-sidebar-count-p">41</p>
+                    <p class="blog-sidebar-count-p">43</p>
                     <span class="blog-sidebar-count-span">标签</span>
                 </div>
                 <div style="clear: both;"></div>
@@ -319,7 +205,7 @@
                     
                       <li class="list-group-item justify-content-between">
                           <a href="/web/categories/iOS/">iOS</a>
-                          <span class="badge badge-default badge-pill">19</span>
+                          <span class="badge badge-default badge-pill">20</span>
                       </li>
                     
                       <li class="list-group-item justify-content-between">
@@ -486,6 +372,10 @@
                       <li><a href="/web/tags/LayoutGuide/" class="tag-could" data-toggle="tooltip" data-placement="top" title="LayoutGuide">LayoutGuide</a></li>
                     
                       <li><a href="/web/tags/SafeArea/" class="tag-could" data-toggle="tooltip" data-placement="top" title="SafeArea">SafeArea</a></li>
+                    
+                      <li><a href="/web/tags/iOS-Frame/" class="tag-could" data-toggle="tooltip" data-placement="top" title="iOS Frame">iOS Frame</a></li>
+                    
+                      <li><a href="/web/tags/iOS-Autolayout/" class="tag-could" data-toggle="tooltip" data-placement="top" title="iOS Autolayout">iOS Autolayout</a></li>
                     
                   
                 </ul>

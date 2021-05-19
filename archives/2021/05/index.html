@@ -2,6 +2,7 @@
 
 
 
+  
 
 
 
@@ -9,6 +10,11 @@
 
 
 
+  
+
+
+
+  
 
 
 
@@ -20,7 +26,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <meta name="renderer" content="webkit">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no", user-scalable=no">
-  <title>Android 三方 SDK 类名冲突的解决方法Hello Skill</title>
+  <title>Archives: 5/2021: 2021Hello Skill</title>
   <link rel="shortcut icon" href="">
   
     
@@ -106,169 +112,59 @@
                 </nav>
             </header>
                 
-<header class="blog-post-page-title">
-    <h4>Android 三方 SDK 类名冲突的解决方法</h4>
-    <time datetime="2021-02-18T10:47:07.000Z"><i class="fa fa-clock-o"></i>2021-02-18</time>
+<div class="blog-main-post">
+	<div class="index-post-br"></div>
+  
+
+
+
+<article class="blog-post-block">
     
-    
-    
-    
-	
-        <span><i class="fa fa-folder-o"></i>
-    		
-    	       <a href="/web/categories/Android/" rel="categories" data-toggle="tooltip" data-placement="top" title="Linux">Android</a>
-    		
-        </span>
-	
-    
-</header>
-<div class="blog-main-post blog-post-page-box">
-    <article class="blog-post-block blog-post-page-content">
+
+    <div class="blog-post-block-padding">
+        <a href="/web/2021/05/18/iOS-布局-尺寸计算/">iOS 布局-尺寸计算</a>
         <section>
             
-                <h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>三方提供的 SDK 一般都会进行混淆。混淆的过程是根据一个名称字典按照一定规则生成新的包名、类名、方法名。因为各自混淆时上下文完全隔离，就会导致混淆后某些类冲突。</p>
-<h1 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h1><p>这种情况一般分为两种，一种是有源代码的库和没有源代码的库冲突，另一种是冲突的库都没有源代码。</p>
-<h2 id="有源代码"><a href="#有源代码" class="headerlink" title="有源代码"></a>有源代码</h2><p>有源代码时，可以通过指定混淆词典的方式来避免冲突。冲突的一个原因就是大家都使用了默认的混淆词典。此时通过指定自定义的混淆词典就可以解决这个问题。</p>
-<p>具体方法是，在该 module 的 <code>proguard-rules.pro</code> 中指定自定义的词典，如下所示</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">-obfuscationdictionary</span> <span class="selector-tag">filename</span><span class="selector-class">.txt</span></span><br><span class="line"><span class="selector-tag">-classobfuscationdictionary</span> <span class="selector-tag">filename</span><span class="selector-class">.txt</span></span><br><span class="line"><span class="selector-tag">-packageobfuscationdictionary</span> <span class="selector-tag">filename</span><span class="selector-class">.txt</span></span><br></pre></td></tr></table></figure>
+                
+                原味地址：https://zhangbuhuai.com/post/auto-layout-part-1.html
+iOS 布局机制iOS 布局机制大概分这么几个层次：
 
-<p><code>filename.txt</code> 就是自定义的词典文件。字典文件中的空格，标点符号，重复的词，还有以’#’开头的行都会被忽略。下面是一个参考案例</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用java中的关键字作字典：避免混淆后与其他包重名，而且混淆之后的代码更加不利于阅读</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This obfuscation dictionary contains reserved Java keywords. They can't</span></span><br><span class="line"><span class="comment"># be used in Java source files, but they can be used in compiled class files.</span></span><br><span class="line"><span class="comment"># Note that this hardly improves the obfuscation. Decent decompilers can</span></span><br><span class="line"><span class="comment"># automatically replace reserved keywords, and the effect can fairly simply be</span></span><br><span class="line"><span class="comment"># undone by obfuscating again with simpler names.</span></span><br><span class="line"><span class="comment"># Usage:</span></span><br><span class="line"><span class="comment">#     java -jar proguard.jar ..... -obfuscationdictionary filename.txt</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="keyword">if</span></span><br><span class="line"><span class="keyword">for</span></span><br><span class="line"><span class="built_in">int</span></span><br><span class="line"><span class="keyword">new</span></span><br><span class="line">try</span><br><span class="line"><span class="keyword">byte</span></span><br><span class="line"><span class="keyword">case</span></span><br><span class="line"><span class="built_in">char</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="keyword">goto</span></span><br><span class="line"><span class="keyword">long</span></span><br><span class="line">this</span><br><span class="line"><span class="built_in">void</span></span><br><span class="line">break</span><br><span class="line">catch</span><br><span class="line"><span class="keyword">class</span></span><br><span class="line">const</span><br><span class="line"><span class="keyword">final</span></span><br><span class="line"><span class="built_in">float</span></span><br><span class="line"><span class="keyword">short</span></span><br><span class="line">super</span><br><span class="line">throw</span><br><span class="line"><span class="keyword">while</span></span><br><span class="line"><span class="keyword">double</span></span><br><span class="line"><span class="keyword">import</span></span><br><span class="line"><span class="keyword">native</span></span><br><span class="line"><span class="keyword">public</span></span><br><span class="line"><span class="keyword">return</span></span><br><span class="line"><span class="keyword">static</span></span><br><span class="line"><span class="keyword">switch</span></span><br><span class="line">throws</span><br><span class="line"><span class="built_in">boolean</span></span><br><span class="line"><span class="keyword">default</span></span><br><span class="line">extends</span><br><span class="line">finally</span><br><span class="line"><span class="keyword">package</span></span><br><span class="line"><span class="keyword">private</span></span><br><span class="line">abstract</span><br><span class="line">continue</span><br><span class="line">strictfp</span><br><span class="line">volatile</span><br><span class="line"><span class="keyword">interface</span></span><br><span class="line">protected</span><br><span class="line">transient</span><br><span class="line">implements</span><br><span class="line">instanceof</span><br><span class="line">synchronized</span><br></pre></td></tr></table></figure>
+frame layout
+autoresizing
+auto layout
 
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>关于 Proguard 的更多资料可以参考 <a href="http://proguard.sourceforge.net/" target="_blank" rel="noopener">http://proguard.sourceforge.net/</a> 和 <a href="https://bbs.huaweicloud.com/blogs/218907" target="_blank" rel="noopener">https://bbs.huaweicloud.com/blogs/218907</a></p>
-<h2 id="没有源代码"><a href="#没有源代码" class="headerlink" title="没有源代码"></a>没有源代码</h2><p>没有源代码时修改就比较麻烦，涉及到 AAR 和 JAR 的编译和反编译。涉及到的工具有 ApkTool、dex2jar、JD-GUI、unzip 和 jarjar-1.4.jar。</p>
-<p>具体思路为：把 AAR 或者 JAR 解压，使用 <strong>jarjar-1.4.jar</strong> 把冲突的类放到一个自定义的 package 下面，然后修改引用这个类的 <code>import</code>，最后把修改的 <code>.class</code> 文件和之前的文件重新打包为 AAR 或者 JAR，工程中引用这个修改过的 SDK 就可以了。</p>
-<h3 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://www.jianshu.com/p/f0a267551493" target="_blank" rel="noopener">Android修改第三方.aar后重新打包</a></p>
-
+Frame
+                ...
             
         </section>
-        <footer class="blog-post-page-tags">
+        <footer>
         
-			
-				
-			<a href="/web/tags/%E7%B1%BB%E5%86%B2%E7%AA%81/" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">类冲突</a>
-				
-			
-		
-        </footer>
-    </article>
-    <article class="blog-post-page-readmore">
-    	
-    	
-		
-			<a href="/web/2021/03/09/iOS-%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="blog-post-page-readmore-prev" data-toggle="tooltip" data-placement="top" title="iOS 开发规范">上一篇</a>
-		
-
-		
-		
-			<a href="/web/2021/02/05/Git-%E6%8F%90%E4%BA%A4%E6%8C%87%E5%AE%9A%E5%8F%98%E6%9B%B4/" class="blog-post-page-readmore-next" data-toggle="tooltip" data-placement="top" title="Git 提交指定变更">下一篇</a>
-		
-
-        <div style="clear: both;"></div>
-    </article>
-
-    <article class="blog-post-block blog-post-page-content">
-            <div class="row">
+            <time datetime="2021-05-18T16:00:00.000Z"><i class="fa fa-clock-o"></i>2021-05-19</time>
+        
+        
+        
+        
+        
+          <span><i class="fa fa-folder-o"></i>
             
-                <div class="col-md-4 col-sm-4 post-page-more-btn">
-                    <span  data-toggle="modal" data-target="#post-donate-content">
-                        <span id="post-donate-btn" class="btn btn-danger btn-block" data-toggle="tooltip" data-placement="top" title="如果您觉得本文还不错或者对您有帮助，可以考虑打赏一下作者哦">打赏本文</span>
-                    </span>
-                </div>
-                <div class="col-md-4 col-sm-4 post-page-more-btn">
-                    <span  data-toggle="modal" data-target="#post-qrcode-content">
-                        <span><span id="post-qrcode-btn" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="微信扫描二维码手机端查看本文及分享本文">二维码</span></span>
-                    </span>
-                </div>
-            </div>
-        <div class="post-more-function-br"></div>
-
-        <div class="modal fade" id="post-donate-content" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">打赏本文</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row post-donate-content">
-                            <div class="col-md-4">
-                                <p>支付宝</p>
-                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/alipay.jpg"/>
-                            </div>
-                            <div class="col-md-4">
-                                <p>微信</p>
-                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/wechat.png"/>
-                            </div>
-                            <div class="col-md-4">
-                                <p>财付通</p>
-                                <img class="post-donate-content-img no-lightbox" src="https://wordpress.obs.cn-north-1.myhuaweicloud.com/money-qr/qqpay.png"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="post-qrcode-content" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">文章二维码</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row post-qrcode-content">
-                            <span class="post-qrcode-content-canvas"></span>
-                            <img class="post-qrcode-content-img no-lightbox" src=""/>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+              <a href="/web/categories/iOS/" itemprop="url" rel="index">
+                iOS
+              </a>
+            
+          </span>
         
-        <script>
-            // post QRcode
-            // 中文转码
-            function toUtf8(str) {
-                var out, i, len, c;
-                out = "";
-                len = str.length;
-                for (i = 0; i < len; i++) {
-                    c = str.charCodeAt(i);
-                    if ((c >= 0x0001) && (c <= 0x007F)) {
-                        out += str.charAt(i);
-                    } else if (c > 0x07FF) {
-                        out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
-                        out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
-                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
-                    } else {
-                        out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
-                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
-                    }
-                }
-                return out;
-            }
-            // 生成
-            var qrcode= $('.post-qrcode-content-canvas').qrcode({width: 150,height: 150,text: toUtf8("https://joriwang.github.io/web/2021/02/18/Android-%E4%B8%89%E6%96%B9-jar-%E5%8C%85%E7%B1%BB%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/")}).hide();
-            var canvas=qrcode.find('canvas').get(0);
-            $('.post-qrcode-content-img').attr('src',canvas.toDataURL('image/jpg'));
-        </script>
+        </footer>
+    </div>
+</article>
 
-        
-    </article>
-    
-</div>
+
+
+  
+    <nav id="pagination" class="blog-pagination">
+            <span class="page-number current">1</span>
+    </nav>
+
+ </div>
 
                 
             <footer class="blog-footer">
@@ -286,11 +182,11 @@
             </div>
             <div class="blog-sidebar-count blog-sidebar-padding">
                 <div class="blog-sidebar-count-left">
-                    <p class="blog-sidebar-count-p">39</p>
+                    <p class="blog-sidebar-count-p">40</p>
                     <span class="blog-sidebar-count-span">文章</span>
                 </div>
                 <div class="blog-sidebar-count-right">
-                    <p class="blog-sidebar-count-p">41</p>
+                    <p class="blog-sidebar-count-p">43</p>
                     <span class="blog-sidebar-count-span">标签</span>
                 </div>
                 <div style="clear: both;"></div>
@@ -317,7 +213,7 @@
                     
                       <li class="list-group-item justify-content-between">
                           <a href="/web/categories/iOS/">iOS</a>
-                          <span class="badge badge-default badge-pill">19</span>
+                          <span class="badge badge-default badge-pill">20</span>
                       </li>
                     
                       <li class="list-group-item justify-content-between">
@@ -484,6 +380,10 @@
                       <li><a href="/web/tags/LayoutGuide/" class="tag-could" data-toggle="tooltip" data-placement="top" title="LayoutGuide">LayoutGuide</a></li>
                     
                       <li><a href="/web/tags/SafeArea/" class="tag-could" data-toggle="tooltip" data-placement="top" title="SafeArea">SafeArea</a></li>
+                    
+                      <li><a href="/web/tags/iOS-Frame/" class="tag-could" data-toggle="tooltip" data-placement="top" title="iOS Frame">iOS Frame</a></li>
+                    
+                      <li><a href="/web/tags/iOS-Autolayout/" class="tag-could" data-toggle="tooltip" data-placement="top" title="iOS Autolayout">iOS Autolayout</a></li>
                     
                   
                 </ul>
